@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Full Page Scroll Sections</title>
-  <!-- Include Bootstrap CSS -->
+  <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <style>
     html, body {
@@ -30,7 +30,22 @@
       overflow: hidden;
     }
 
-    section video,
+    .vimeo-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .vimeo-background iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
     section img:not(.overlay-image) {
       position: absolute;
       top: 0;
@@ -38,8 +53,6 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      -o-object-fit: cover;
-      -webkit-object-fit: cover;
       z-index: 1;
     }
 
@@ -181,12 +194,11 @@
 </head>
 <body>
 
-  <!-- Section 1 with Video and Overlay -->
+  <!-- Section 1 with Vimeo background -->
   <section id="section1">
-    <video autoplay loop muted playsinline>
-      <source src="https://drive.google.com/uc?export=download&id=1xeYPm8B9fB6rSEbGEf3SJFp0zlfFDeW2" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
+    <div class="vimeo-background">
+      <iframe src="https://player.vimeo.com/video/1078093645?h=49b03a3297&background=1&autoplay=1&loop=1&muted=1&playsinline=1" allow="autoplay; fullscreen"></iframe>
+    </div>
     <img src="Signature.png" alt="Overlay" class="overlay-image">
     <div class="copyright">©2025 MOVARTEM INC. ALL RIGHTS RESERVED</div>
     <div class="dropdown">
