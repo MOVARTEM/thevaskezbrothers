@@ -30,7 +30,7 @@
       overflow: hidden;
     }
 
-    section video, 
+    section video,
     section img:not(.overlay-image) {
       position: absolute;
       top: 0;
@@ -38,6 +38,8 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      -o-object-fit: cover;
+      -webkit-object-fit: cover;
       z-index: 1;
     }
 
@@ -176,8 +178,8 @@
 
   <!-- Section 1 with Video and Overlay -->
   <section id="section1">
-    <video autoplay loop muted>
-      <source src="Timeline 1.mp4" type="video/mp4">
+    <video autoplay loop muted playsinline>
+      <source src="https://drive.google.com/uc?export=download&id=1xeYPm8B9fB6rSEbGEf3SJFp0zlfFDeW2" type="video/mp4">
       Your browser does not support the video tag.
     </video>
     <img src="Signature.png" alt="Overlay" class="overlay-image">
