@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Full Page Scroll Sections</title>
   <style>
     html, body {
@@ -160,6 +161,28 @@
 
     #section3 .back-to-top:hover {
       opacity: 1;
+    }
+
+    /* Make images responsive on smaller screens */
+    @media (max-width: 768px) {
+      section img {
+        object-fit: contain; /* Ensure images fit within the screen */
+        max-width: 100%; /* Ensure images are not oversized */
+        height: auto;
+      }
+
+      /* Adjust text size for smaller screens */
+      .dropdown-toggle {
+        font-size: 16px;
+      }
+
+      .dropdown-content a {
+        font-size: 16px;
+      }
+
+      .back-to-top {
+        font-size: 50px; /* Smaller size for mobile screens */
+      }
     }
   </style>
 </head>
