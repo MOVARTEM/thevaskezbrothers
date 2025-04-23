@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Full Page Scroll Sections</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      background-color: black;
+      scroll-behavior: smooth;
+      scroll-snap-type: y mandatory;
+      overflow-y: scroll;
+      font-family: Arial, sans-serif;
+    }
+
+    section {
+      scroll-snap-align: start;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    section video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 1;
+    }
+
+    #section1 .overlay-image {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.9);
+      object-fit: contain;
+      z-index: 2;
+      pointer-events: none;
+      max-width: 100%;
+      height: auto;
+    }
+
+    section img:not(.overlay-image) {
+      max-width: 100%;
+      max-height: 100%;
+      height: auto;
+      width: auto;
+      z-index: 2;
+      transition: opacity 0.3s ease;
+    }
+
+    /* Copyright */
+    #section1 .copyright {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: red;
+      font-size: 10px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      opacity: 0.8;
+      z-index: 3;
+    }
+
+    /* Dropdown Menu */
+    .dropdown {
+      position: absolute;
+      top: 30px;
+      right: 30px;
+      z-index: 3;
+    }
+
+    .dropdown-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+
+    .dropdown-toggle {
+      color: red;
+      text-transform: uppercase;
+      font-size: 13px;
+      letter-spacing: 1px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: Arial, sans-serif;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      text-align: center;
+      min-width: 120px;
+      padding: 0;
+    }
+
+    .dropdown-content a {
+      color: red;
+      padding: 8px 16px;
+      text-decoration: none;
+      display: block;
+      font-size: 12px;
+      text-transform: uppercase;
+      font-family: Arial, sans-serif;
+      letter-spacing: 1px;
+      opacity: 0.8;
+    }
+
+    .dropdown-content a:hover {
+      opacity: 1;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    /* Dim image opacity on hover for section 2 and 3 */
+    #section2:hover img,
+    #section3:hover img {
+      opacity: 0.9;
+    }
+
+    /* Flashing effect for Back to Top text */
+    @keyframes flash {
+      0% {
+        opacity: 0.4;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0.4;
+      }
+    }
+
+    /* "‸" text in Section 3 */
+    #section3 .back-to-top {
+      position: absolute;
+      bottom: 30px;
+      color: red;
+      font-size: 70px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      cursor: pointer;
+      animation: flash 1.5s infinite;
+    }
+
+    #section3 .back-to-top:hover {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Section 1 with Video and Overlay -->
+  <section id="section1">
+    <!-- Background video -->
+    <video autoplay loop muted>
+      <source src="Timeline 1.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+
+    <!-- Overlay image -->
+    <img src="Test 1.png" alt="Overlay" class="overlay-image">
+
+    <!-- Copyright -->
+    <div class="copyright">©2025 MOVARTEM INC. ALL RIGHTS RESERVED</div>
+
+    <!-- Dropdown Links -->
+    <div class="dropdown">
+      <div class="dropdown-container">
+        <button class="dropdown-toggle">Links</button>
+        <div class="dropdown-content">
+          <a href="mailto:movartem@outlook.com">Email</a>
+          <a href="https://www.instagram.com/thevaskezbrothers/" target="_blank">Insta</a>
+          <a href="https://vimeo.com/user228439326" target="_blank">Vimeo</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2 -->
+  <section id="section2">
+    <a href="https://youtu.be/TCYbkjs_BI4?si=T1a22YcaJ7rZKNVf" target="_blank">
+      <img src="1.png" alt="CRASHER">
+    </a>
+  </section>
+
+  <!-- Section 3 -->
+  <section id="section3">
+    <a href="https://youtu.be/zSJIaUxfrWI?si=9cvAcaGN2NRyI7kW" target="_blank">
+      <img src="2.png" alt="RESURGE">
+    </a>
+
+    <!-- Back to Top text -->
+    <div class="back-to-top" onclick="scrollToSection1()">‸</div>
+  </section>
+
+  <script>
+    function scrollToSection1() {
+      // Smooth scroll back to section 1
+      document.getElementById('section1').scrollIntoView({ behavior: 'smooth' });
+    }
+  </script>
+
+</body>
+</html>
