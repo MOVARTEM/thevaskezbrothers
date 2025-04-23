@@ -42,7 +42,7 @@
       width: 100vw;
       height: 56.25vw; /* 16:9 Aspect Ratio */
       min-height: 100vh;
-      min-width: 177.77vh; /* 16:9 Aspect Ratio */
+      min-width: 177.77vh;
       transform: translate(-50%, -50%);
       border: none;
       pointer-events: none;
@@ -64,12 +64,11 @@
       position: absolute;
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -50%) scale(0.9);
-      object-fit: contain;
+      transform: translate(-50%, -50%);
+      max-width: 90%;
+      height: auto;
       z-index: 2;
       pointer-events: none;
-      max-width: 100%;
-      height: auto;
     }
 
     .copyright {
@@ -81,8 +80,11 @@
       font-size: 0.6em;
       letter-spacing: 1px;
       text-transform: uppercase;
-      opacity: 0.8;
+      opacity: 0.9;
       z-index: 3;
+      background: rgba(0, 0, 0, 0.4);
+      padding: 4px 8px;
+      border-radius: 4px;
     }
 
     .dropdown {
