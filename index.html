@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Full Page Scroll Sections</title>
+  <!-- Include Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <style>
     html, body {
       margin: 0;
@@ -38,6 +40,7 @@
       z-index: 1;
     }
 
+    /* Overlay Image */
     #section1 .overlay-image {
       position: absolute;
       top: 50%;
@@ -162,28 +165,6 @@
     #section3 .back-to-top:hover {
       opacity: 1;
     }
-
-    /* Make images responsive on smaller screens */
-    @media (max-width: 768px) {
-      section img {
-        object-fit: contain; /* Ensure images fit within the screen */
-        max-width: 100%; /* Ensure images are not oversized */
-        height: auto;
-      }
-
-      /* Adjust text size for smaller screens */
-      .dropdown-toggle {
-        font-size: 16px;
-      }
-
-      .dropdown-content a {
-        font-size: 16px;
-      }
-
-      .back-to-top {
-        font-size: 50px; /* Smaller size for mobile screens */
-      }
-    }
   </style>
 </head>
 <body>
@@ -218,14 +199,14 @@
   <!-- Section 2 -->
   <section id="section2">
     <a href="https://youtu.be/TCYbkjs_BI4?si=T1a22YcaJ7rZKNVf" target="_blank">
-      <img src="CRASHER vert.png" alt="CRASHER">
+      <img class="img-fluid" src="CRASHER vert.png" alt="CRASHER"> <!-- Using Bootstrap's responsive image class -->
     </a>
   </section>
 
   <!-- Section 3 -->
   <section id="section3">
     <a href="https://youtu.be/zSJIaUxfrWI?si=9cvAcaGN2NRyI7kW" target="_blank">
-      <img src="RESURGE vert.png" alt="RESURGE">
+      <img class="img-fluid" src="RESURGE vert.png" alt="RESURGE"> <!-- Using Bootstrap's responsive image class -->
     </a>
 
     <!-- Back to Top text -->
@@ -239,5 +220,9 @@
     }
   </script>
 
+  <!-- Include Bootstrap JS (optional, for functionality like dropdown) -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
