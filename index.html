@@ -2,42 +2,65 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Full Page Scroll Sections</title>
+  <title>Full Page Vimeo Background</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     html, body {
       margin: 0;
       padding: 0;
       height: 100%;
       width: 100%;
+      overflow: hidden;
       background-color: black;
-      scroll-behavior: smooth;
-      scroll-snap-type: y mandatory;
-      overflow-y: scroll;
       font-family: Arial, sans-serif;
     }
 
     section {
-      scroll-snap-align: start;
       width: 100vw;
       height: 100vh;
+      position: relative;
+      overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
-      position: relative;
-      overflow: hidden;
     }
 
-    #section1 iframe {
+    .video-wrapper {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
+      overflow: hidden;
       z-index: 1;
-      border: none;
     }
 
-    #section1 .overlay-image {
+    .video-wrapper iframe {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100vw;
+      height: 56.25vw; /* 16:9 Aspect Ratio */
+      min-height: 100vh;
+      min-width: 177.77vh; /* 16:9 Aspect Ratio */
+      transform: translate(-50%, -50%);
+      border: none;
+      pointer-events: none;
+    }
+
+    @media (max-width: 768px) {
+      .video-wrapper iframe {
+        transform: translate(-50%, -50%) scale(1.1);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .video-wrapper iframe {
+        transform: translate(-50%, -50%) scale(1.25);
+      }
+    }
+
+    .overlay-image {
       position: absolute;
       top: 50%;
       left: 50%;
@@ -49,8 +72,7 @@
       height: auto;
     }
 
-    /* Copyright */
-    #section1 .copyright {
+    .copyright {
       position: absolute;
       bottom: 30px;
       left: 50%;
@@ -63,7 +85,6 @@
       z-index: 3;
     }
 
-    /* Dropdown Menu */
     .dropdown {
       position: absolute;
       top: 30px;
@@ -86,7 +107,6 @@
       background: none;
       border: none;
       cursor: pointer;
-      font-family: Arial, sans-serif;
     }
 
     .dropdown-content {
@@ -105,7 +125,6 @@
       display: block;
       font-size: 0.5em;
       text-transform: uppercase;
-      font-family: Arial, sans-serif;
       letter-spacing: 1px;
       opacity: 0.8;
     }
@@ -121,18 +140,22 @@
 </head>
 <body>
 
-  <!-- Section 1 with Vimeo Video and Overlay -->
   <section id="section1">
-    <!-- Background Vimeo video -->
-    <iframe src="https://player.vimeo.com/video/1078133379?h=4713459c15&autoplay=1&loop=1&muted=1&background=1" allow="autoplay; fullscreen"></iframe>
+    <!-- Responsive Vimeo Background Video -->
+    <div class="video-wrapper">
+      <iframe 
+        src="https://player.vimeo.com/video/1078133379?h=4713459c15&autoplay=1&loop=1&muted=1&background=1"
+        allow="autoplay; fullscreen">
+      </iframe>
+    </div>
 
-    <!-- Overlay image -->
+    <!-- Overlay Image -->
     <img src="Test 1.png" alt="Overlay" class="overlay-image">
 
     <!-- Copyright -->
     <div class="copyright">©2025 MOVARTEM INC. ALL RIGHTS RESERVED</div>
 
-    <!-- Dropdown Links -->
+    <!-- Dropdown Menu -->
     <div class="dropdown">
       <div class="dropdown-container">
         <button class="dropdown-toggle">Links</button>
