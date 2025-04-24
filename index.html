@@ -1,219 +1,244 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Vaskez Brothers</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Arial+Narrow:wght@400&family=Roboto+Condensed:wght@700&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Agdasima:wght@400;700&display=swap');
+  <meta charset="UTF-8">
+  <title>Responsive Site with Mobile Fallback</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      background-color: black;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+    }
 
-        body, html {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            background-color: black;
-            color: white;
-            height: 100%;
-        }
-        .container {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            min-height: 100%;
-            padding: 20px;
-            box-sizing: border-box;
-            position: relative;
-        }
-        header {
-            position: absolute;
-            top: 20px;
-            right: 0;
-            bottom: 0;
-            width: 120px;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-        }
-        nav {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .vertical-line {
-            width: 1px;
-            background-color: white;
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            right: 120px;
-        }
-        nav ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-            text-align: center;
-        }
-        nav ul li {
-            margin-bottom: 10px;
-            position: relative;
-        }
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-            font-family: 'Agdasima', sans-serif;
-            font-weight: 700;
-            font-size: 20px;
-            cursor: pointer;
-        }
-        nav ul > li > a:hover {
-            color: white;
-        }
-        nav ul li a.active {
-            text-decoration: none;
-        }
-        nav ul li ul {
-            display: none;
-            margin-top: 10px;
-            padding: 0;
-            list-style-type: none;
-            text-align: center;
-        }
-        nav ul li ul li {
-            margin-bottom: 10px;
-        }
-        #projects-dropdown li a {
-            font-size: 18px;
-            font-weight: 400;
-            text-decoration: none;
-            font-style: italic;
-        }
-        nav ul li ul li a:hover {
-            color: red;
-        }
-        #contact-dropdown li a {
-            font-family: 'Agdasima', sans-serif;
-            font-size: 18px;
-            font-weight: 400;
-            text-decoration: none;
-        }
-        main {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: flex-start;
-            padding-left: 20px;
-            padding-right: 140px;
-        }
-        h1 {
-            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-            font-size: 8vw;
-            margin-bottom: 0;
-            line-height: 1;
-        }
-        .subtitle {
-            font-family: 'Arial Narrow', Arial, sans-serif;
-            color: #ff0000;
-            font-size: 1.5vw;
-            margin-top: -0.5vw;
-            padding-left: ;
-        }
-  footer {
-            position: fixed; /* Fixed position to keep it at the bottom */
-            bottom: 0; /* Align to the bottom of the viewport */
-            left: 50%; /* Center horizontally */
-            transform: translateX(-50%); /* Center horizontally */
-            background-color: none; /* Background color for the footer */
-            color: WHITE; /* Text color for the footer */
-            padding: 10px; /* Adjust padding as needed */
-            text-align: center; /* Center-align text inside the footer */
-            font-size: 0.5vw;
-            font-family: 'arial';
-        }
+    .desktop-site, .mobile-message {
+      display: none;
+    }
 
-        /* Media Queries for Smaller Screens */
-        @media (max-width: 768px) {
-h1 {
-                font-size: 12.5vw; /* Adjust size for smaller screens */
-              padding-left: 0.7vw;
-            }
-            .subtitle {
-                font-size: 2vw; /* Adjust size for smaller screens */
+    @media (min-width: 1024px) {
+      .desktop-site {
+        display: block;
+        height: 100vh;
+        width: 100%;
+        scroll-snap-type: y mandatory;
+        overflow-y: scroll;
+        scroll-behavior: smooth;
+      }
+    }
 
-            }
-            main {
-                padding-left: 0px; /* Reduce padding for smaller screens */
-                padding-right: 0px; /* Reduce padding for smaller screens */
-            }
-            footer {
-                font-size: 1vw; /* Adjust footer size for smaller screens */
-                
-            }
-        }
+    @media (max-width: 1023px) {
+      .mobile-message {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        height: 100vh;
+        width: 100vw;
+        color: red;
+      }
 
-    </style>
+      .mobile-message img {
+        max-width: 90%;
+        max-height: 70%;
+      }
+
+      .mobile-message .message {
+        margin-top: 20px;
+        font-size: 0.8em;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        opacity: 0.9;
+      }
+
+      .mobile-message footer {
+        position: absolute;
+        bottom: 20px;
+        text-align: center;
+        color: #555;
+        font-size: 0.7em;
+        letter-spacing: 1px;
+        opacity: 0.8;
+      }
+    }
+
+    section {
+      scroll-snap-align: start;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .video-wrapper {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .video-wrapper iframe {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100vw;
+      height: 56.25vw;
+      min-height: 100vh;
+      min-width: 177.77vh;
+      pointer-events: none;
+      border: none;
+    }
+
+    #section1 .overlay-image {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.9);
+      object-fit: contain;
+      z-index: 2;
+      pointer-events: none;
+      max-width: 100%;
+      height: auto;
+    }
+
+    section img:not(.overlay-image) {
+      max-width: 100%;
+      max-height: 100%;
+      height: auto;
+      width: auto;
+      z-index: 2;
+    }
+
+    #section3 .copyright {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: red;
+      font-size: 0.6em;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      opacity: 0.8;
+      z-index: 3;
+    }
+
+    .dropdown {
+      position: absolute;
+      top: 30px;
+      right: 30px;
+      z-index: 3;
+    }
+
+    .dropdown-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+
+    .dropdown-toggle {
+      color: red;
+      text-transform: uppercase;
+      font-size: 0.7em;
+      letter-spacing: 1px;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      text-align: center;
+      min-width: 120px;
+    }
+
+    .dropdown-content a {
+      color: red;
+      padding: 8px 16px;
+      text-decoration: none;
+      display: block;
+      font-size: 0.5em;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      opacity: 0.8;
+    }
+
+    .dropdown-content a:hover {
+      opacity: 1;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    #section2:hover img,
+    #section3:hover img {
+      opacity: 0.9;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <nav>
-                <ul>
-                    <li>
-                        <a href="javascript:void(0)" onclick="toggleProjects(this)">PROJECTS</a>
-                        <ul id="projects-dropdown">
-                            <li><a href="https://youtu.be/TCYbkjs_BI4?si=rcAzeJgQho_4Lf4s">CRASHER</a></li>
-                            <li><a href="https://vimeo.com/1017972578" target="_blank">RESURGE</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0)" onclick="toggleContact(this)">CONTACT</a>
-                        <ul id="contact-dropdown">
-                            <li><a href="https://www.instagram.com/thevaskezbrothers" target="_blank">INSTAGRAM</a></li>
-                            <li><a href="https://www.youtube.com/@TheVaskezBrothers" target="_blank">YOUTUBE</a></li>
-                            <li><a href="mailto:movartem@outlook.com">EMAIL</a></li>
-                            <li><a href="https://vimeo.com/user228439326" target="_blank">VIMEO</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </nav>
-        </header>
-        <main id="main-content">
-            <h1>THE VASKEZ BROTHERS</h1>
-         
-        </main>
-        <footer>
-            <p>&copy; 2025 MOVARTEM INC. All rights reserved.</p>
-        </footer>
-        <div class="vertical-line"></div>
-    </div>
 
-    <script>
-        function toggleProjects(element) {
-            var dropdown = document.getElementById('projects-dropdown');
-            var displayStyle = dropdown.style.display;
+  <!-- Desktop Version -->
+  <div class="desktop-site">
+    <!-- Section 1 with Vimeo -->
+    <section id="section1">
+      <div class="video-wrapper">
+        <iframe
+          title="vimeo-player"
+          src="https://player.vimeo.com/video/1078142628?h=fec008f5ca&autoplay=1&loop=1&muted=1&background=1"
+          allow="autoplay; fullscreen"
+        ></iframe>
+      </div>
 
-            if (displayStyle === 'block') {
-                dropdown.style.display = 'none';
-                element.classList.remove('active');
-            } else {
-                dropdown.style.display = 'block';
-                element.classList.add('active');
-            }
-        }
+      <img src="Test 1.png" alt="Overlay" class="overlay-image">
 
-        function toggleContact(element) {
-            var dropdown = document.getElementById('contact-dropdown');
-            var displayStyle = dropdown.style.display;
+      <div class="dropdown">
+        <div class="dropdown-container">
+          <button class="dropdown-toggle">Links</button>
+          <div class="dropdown-content">
+            <a href="mailto:movartem@outlook.com">Email</a>
+            <a href="https://www.instagram.com/thevaskezbrothers/" target="_blank">Insta</a>
+            <a href="https://vimeo.com/user228439326" target="_blank">Vimeo</a>
+          </div>
+        </div>
+      </div>
+    </section>
 
-            if (displayStyle === 'block') {
-                dropdown.style.display = 'none';
-                element.classList.remove('active');
-            } else {
-                dropdown.style.display = 'block';
-                element.classList.add('active');
-            }
-        }
-    </script>
+    <!-- Section 2 -->
+    <section id="section2">
+      <a href="https://youtu.be/TCYbkjs_BI4?si=T1a22YcaJ7rZKNVf" target="_blank">
+        <img src="CRASHER.png" alt="CRASHER">
+      </a>
+    </section>
+
+    <!-- Section 3 -->
+    <section id="section3">
+      <a href="https://youtu.be/zSJIaUxfrWI?si=9cvAcaGN2NRyI7kW" target="_blank">
+        <img src="Thumbnail.png" alt="RESURGE">
+      </a>
+      <div class="copyright">©2025 MOVARTEM INC. ALL RIGHTS RESERVED</div>
+    </section>
+  </div>
+
+  <!-- Mobile Fallback -->
+  <div class="mobile-message">
+    <img src="Test 1.png" alt="Centered Image">
+    <div class="message">Please view this website on a computer or larger screen</div>
+  </div>
+
 </body>
 </html>
