@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>The Vaskez Brothers</title>
   <style>
+    :root {
+      /* we’ll override this with JS */
+      --vh: 1vh;
+    }
     html, body {
       margin: 0;
       padding: 0;
@@ -19,15 +23,19 @@
     .background-video.desktop {
       position: fixed;
       top: 0; left: 0;
-      width: 100vw; height: 100vh;
-      z-index: 0; overflow: hidden;
+      width: 100vw;
+      height: calc(var(--vh) * 100);
+      z-index: 0;
+      overflow: hidden;
     }
     .background-video.desktop iframe {
       position: absolute;
       top: 50%; left: 50%;
       transform: translate(-50%, -50%);
-      width: 100vw; height: 56.25vw; /* 16:9 */
-      min-width: 177.78vh; min-height: 100vh;
+      width: 100vw;
+      height: 56.25vw; /* 16:9 */
+      min-width: 177.78vh;
+      min-height: 100vh;
       border: none;
     }
 
@@ -35,20 +43,19 @@
     .background-video.mobile {
       position: fixed;
       top: 0; left: 0;
-      width: 100vw; height: 100vh;
-      z-index: 0; overflow: hidden;
+      width: 100vw;
+      height: calc(var(--vh) * 100);
+      z-index: 0;
+      overflow: hidden;
       display: none;
     }
     .background-video.mobile video {
       position: absolute;
       top: 50%; left: 50%;
       transform: translate(-50%, -50%);
-      /* natural sizing plus minimum fill */
-      width: auto; 
-      height: auto;
-      min-width: 100%; 
-      min-height: 100%;
-      /* no object-fit here */
+      height: calc(var(--vh) * 100);
+      width: auto;        /* scale by height only */
+      /* no object-fit */
     }
 
     /* swap at tablet breakpoint */
@@ -61,7 +68,7 @@
     .foreground {
       position: relative;
       z-index: 1;
-      height: 100%;
+      height: calc(var(--vh) * 100);
       display: flex;
       flex-direction: column;
     }
@@ -168,6 +175,13 @@
   </div>
 
   <script>
+    // Safari 100vh fix
+    function setVh() {
+      document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
+    }
+    setVh();
+    window.addEventListener('resize', setVh);
+
     function toggleProjects() {
       const d = document.getElementById('projects-dropdown');
       d.style.display = d.style.display === 'block' ? 'none' : 'block';
