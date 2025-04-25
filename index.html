@@ -31,8 +31,9 @@
       top: 0;
       left: 0;
       width: 100vw;
-      height: 100vh;
+      height: auto;
       z-index: 1; /* Background video layer */
+      background-color: black;
     }
 
     .background-video-desktop iframe {
@@ -40,10 +41,8 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 100vw;
-      height: 56.25vw; /* Maintain 16:9 aspect ratio */
-      min-height: 100vh;
-      min-width: 177.77vh;
+      width: 100%;
+      height: auto;
       border: none;
     }
 
@@ -135,9 +134,8 @@
       z-index: 6; /* Ensure the image is on top */
     }
 
-    /* Ensure the footer stays at the bottom and on top of video layers */
     footer {
-      position: fixed;
+      position: absolute;
       bottom: 0;
       left: 50%;
       transform: translateX(-50%);
@@ -146,7 +144,7 @@
       padding: 10px;
       text-align: center;
       font-family: Arial, sans-serif;
-      z-index: 10; /* Ensure the footer stays above everything */
+      z-index: 4;
     }
 
     @media (max-width: 768px) {
@@ -228,6 +226,21 @@
       const dropdown = document.getElementById('contact-dropdown');
       dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
     }
+
+    // Adjust background video height to fit the screen size, considering footer space
+    function adjustBackgroundVideo() {
+      const videoDesktop = document.querySelector('.background-video-desktop iframe');
+      const footer = document.querySelector('footer');
+      const footerHeight = footer ? footer.offsetHeight : 0;
+      const viewportHeight = window.innerHeight;
+
+      const videoHeight = viewportHeight - footerHeight; // Subtract footer height from the viewport
+      videoDesktop.style.height = `${videoHeight}px`;
+    }
+
+    // Call the adjust function on window resize and load
+    window.addEventListener('resize', adjustBackgroundVideo);
+    window.addEventListener('load', adjustBackgroundVideo);
   </script>
 
 </body>
