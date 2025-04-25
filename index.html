@@ -1,219 +1,233 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Vaskez Brothers</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Arial+Narrow:wght@400&family=Roboto+Condensed:wght@700&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Agdasima:wght@400;700&display=swap');
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Vaskez Brothers</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      overflow: hidden; /* Disable scrolling */
+      background-color: black;
+      font-family: Arial, sans-serif;
+      color: white;
+    }
 
-        body, html {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            background-color: black;
-            color: white;
-            height: 100%;
-        }
-        .container {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            min-height: 100%;
-            padding: 20px;
-            box-sizing: border-box;
-            position: relative;
-        }
-        header {
-            position: absolute;
-            top: 20px;
-            right: 0;
-            bottom: 0;
-            width: 120px;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-        }
-        nav {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .vertical-line {
-            width: 1px;
-            background-color: white;
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            right: 120px;
-        }
-        nav ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-            text-align: center;
-        }
-        nav ul li {
-            margin-bottom: 10px;
-            position: relative;
-        }
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-            font-family: 'Agdasima', sans-serif;
-            font-weight: 700;
-            font-size: 20px;
-            cursor: pointer;
-        }
-        nav ul > li > a:hover {
-            color: white;
-        }
-        nav ul li a.active {
-            text-decoration: none;
-        }
-        nav ul li ul {
-            display: none;
-            margin-top: 10px;
-            padding: 0;
-            list-style-type: none;
-            text-align: center;
-        }
-        nav ul li ul li {
-            margin-bottom: 10px;
-        }
-        #projects-dropdown li a {
-            font-size: 18px;
-            font-weight: 400;
-            text-decoration: none;
-            font-style: italic;
-        }
-        nav ul li ul li a:hover {
-            color: red;
-        }
-        #contact-dropdown li a {
-            font-family: 'Agdasima', sans-serif;
-            font-size: 18px;
-            font-weight: 400;
-            text-decoration: none;
-        }
-        main {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: flex-start;
-            padding-left: 20px;
-            padding-right: 140px;
-        }
-        h1 {
-            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-            font-size: 8vw;
-            margin-bottom: 0;
-            line-height: 1;
-        }
-        .subtitle {
-            font-family: 'Arial Narrow', Arial, sans-serif;
-            color: #ff0000;
-            font-size: 1.5vw;
-            margin-top: -0.5vw;
-            padding-left: ;
-        }
-  footer {
-            position: fixed; /* Fixed position to keep it at the bottom */
-            bottom: 0; /* Align to the bottom of the viewport */
-            left: 50%; /* Center horizontally */
-            transform: translateX(-50%); /* Center horizontally */
-            background-color: none; /* Background color for the footer */
-            color: WHITE; /* Text color for the footer */
-            padding: 10px; /* Adjust padding as needed */
-            text-align: center; /* Center-align text inside the footer */
-            font-size: 0.5vw;
-            font-family: 'arial';
-        }
+    .background-videos-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0; /* Background video layer */
+      overflow: hidden;
+    }
 
-        /* Media Queries for Smaller Screens */
-        @media (max-width: 768px) {
-h1 {
-                font-size: 12.5vw; /* Adjust size for smaller screens */
-              padding-left: 0.7vw;
-            }
-            .subtitle {
-                font-size: 2vw; /* Adjust size for smaller screens */
+    .background-video-desktop {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 1; /* Background video layer */
+    }
 
-            }
-            main {
-                padding-left: 0px; /* Reduce padding for smaller screens */
-                padding-right: 0px; /* Reduce padding for smaller screens */
-            }
-            footer {
-                font-size: 1vw; /* Adjust footer size for smaller screens */
-                
-            }
-        }
+    .background-video-desktop iframe {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100vw;
+      height: 56.25vw; /* Maintain 16:9 aspect ratio */
+      min-height: 100vh;
+      min-width: 177.77vh;
+      border: none;
+    }
 
-    </style>
+    .background-video-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 2; /* Overlay video layer */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .background-video-overlay iframe {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      max-width: 100vw;
+      max-height: 56.25vw;
+      width: 100%;
+      height: auto;
+      min-height: 100vh;
+      border: none;
+    }
+
+    .foreground {
+      position: relative;
+      z-index: 3; /* Foreground layer */
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    header {
+      position: absolute;
+      top: 20px;
+      right: 0;
+      width: 120px;
+      z-index: 4;
+    }
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      text-align: center;
+    }
+
+    nav ul li {
+      margin-bottom: 10px;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-size: 13px;
+    }
+
+    nav ul li ul {
+      display: none;
+      margin-top: 10px;
+    }
+
+    nav ul li ul li a {
+      font-size: 12px;
+      font-style: italic;
+    }
+
+    nav ul li a:hover,
+    nav ul li ul li a:hover {
+      color: red;
+    }
+
+    main {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 5;
+    }
+
+    .main-image {
+      max-width: 100%;
+      height: auto;
+      z-index: 6; /* Ensure the image is on top */
+    }
+
+    footer {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      color: white;
+      font-size: 10px;
+      padding: 10px;
+      text-align: center;
+      font-family: Arial, sans-serif;
+      z-index: 4;
+    }
+
+    @media (max-width: 768px) {
+      nav ul li a {
+        font-size: 14px;
+      }
+
+      footer {
+        font-size: 1vw;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <nav>
-                <ul>
-                    <li>
-                        <a href="javascript:void(0)" onclick="toggleProjects(this)">PROJECTS</a>
-                        <ul id="projects-dropdown">
-                            <li><a href="https://youtu.be/TCYbkjs_BI4?si=rcAzeJgQho_4Lf4s">CRASHER</a></li>
-                            <li><a href="https://vimeo.com/1017972578" target="_blank">RESURGE</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0)" onclick="toggleContact(this)">CONTACT</a>
-                        <ul id="contact-dropdown">
-                            <li><a href="https://www.instagram.com/thevaskezbrothers" target="_blank">INSTAGRAM</a></li>
-                            <li><a href="https://www.youtube.com/@TheVaskezBrothers" target="_blank">YOUTUBE</a></li>
-                            <li><a href="mailto:movartem@outlook.com">EMAIL</a></li>
-                            <li><a href="https://vimeo.com/user228439326" target="_blank">VIMEO</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </nav>
-        </header>
-        <main id="main-content">
-            <h1>THE VASKEZ BROTHERS</h1>
-         
-        </main>
-        <footer>
-            <p>&copy; 2025 MOVARTEM INC. All rights reserved.</p>
-        </footer>
-        <div class="vertical-line"></div>
+
+  <!-- Fullscreen Background Video Container -->
+  <div class="background-videos-container">
+    <!-- First Background Video -->
+    <div class="background-video-desktop">
+      <iframe
+        src="https://player.vimeo.com/video/1078142628?h=fec008f5ca&autoplay=1&loop=1&muted=1&background=1"
+        allow="autoplay; fullscreen"
+        allowfullscreen
+        title="vimeo-player-desktop">
+      </iframe>
     </div>
 
-    <script>
-        function toggleProjects(element) {
-            var dropdown = document.getElementById('projects-dropdown');
-            var displayStyle = dropdown.style.display;
+    <!-- Overlay Background Video -->
+    <div class="background-video-overlay">
+      <iframe
+        src="https://player.vimeo.com/video/1078142628?h=fec008f5ca&autoplay=1&loop=1&muted=1&background=1"
+        allow="autoplay; fullscreen"
+        allowfullscreen
+        title="vimeo-player-overlay">
+      </iframe>
+    </div>
+  </div>
 
-            if (displayStyle === 'block') {
-                dropdown.style.display = 'none';
-                element.classList.remove('active');
-            } else {
-                dropdown.style.display = 'block';
-                element.classList.add('active');
-            }
-        }
+  <div class="foreground">
+    <header>
+      <nav>
+        <ul>
+          <li>
+            <a href="javascript:void(0)" onclick="toggleProjects(this)">PROJECTS</a>
+            <ul id="projects-dropdown">
+              <li><a href="https://youtu.be/TCYbkjs_BI4?si=rcAzeJgQho_4Lf4s">CRASHER</a></li>
+              <li><a href="https://vimeo.com/1017972578" target="_blank">RESURGE</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="javascript:void(0)" onclick="toggleContact(this)">LINKS</a>
+            <ul id="contact-dropdown">
+              <li><a href="https://www.instagram.com/thevaskezbrothers" target="_blank">INSTAGRAM</a></li>
+              <li><a href="https://www.youtube.com/@TheVaskezBrothers" target="_blank">YOUTUBE</a></li>
+              <li><a href="mailto:movartem@outlook.com">EMAIL</a></li>
+              <li><a href="https://vimeo.com/user228439326" target="_blank">VIMEO</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </header>
 
-        function toggleContact(element) {
-            var dropdown = document.getElementById('contact-dropdown');
-            var displayStyle = dropdown.style.display;
+    <main>
+      <img src="Test 1.png" alt="Test 1" class="main-image" />
+    </main>
 
-            if (displayStyle === 'block') {
-                dropdown.style.display = 'none';
-                element.classList.remove('active');
-            } else {
-                dropdown.style.display = 'block';
-                element.classList.add('active');
-            }
-        }
-    </script>
+    <footer>
+      <p>&copy; 2025 MOVARTEM INC. All rights reserved.</p>
+    </footer>
+  </div>
+
+  <script>
+    function toggleProjects(element) {
+      const dropdown = document.getElementById('projects-dropdown');
+      dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function toggleContact(element) {
+      const dropdown = document.getElementById('contact-dropdown');
+      dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+    }
+  </script>
+
 </body>
 </html>
