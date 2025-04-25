@@ -10,7 +10,7 @@
       padding: 0;
       height: 100%;
       width: 100%;
-      overflow: hidden; /* Disable scrolling on all browsers */
+      overflow: hidden; /* Disable scrolling */
       background-color: black;
       font-family: Arial, sans-serif;
       color: white;
@@ -49,27 +49,33 @@
 
     .background-video-overlay {
       position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: auto;
-      height: auto;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
       z-index: 2; /* Overlay video layer */
-      display: none; /* Hide by default */
-      max-width: 90vw; /* Smaller width with margin */
-      max-height: 50vw; /* Ensure the height respects the width */
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     .background-video-overlay iframe {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      max-width: 100vw;
+      max-height: 56.25vw;
       width: 100%;
-      height: 100%;
+      height: auto;
+      min-height: 100vh;
       border: none;
     }
 
     .foreground {
       position: relative;
       z-index: 3; /* Foreground layer */
-      min-height: calc(100vh - 50px); /* Ensure there's space for footer */
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -142,12 +148,6 @@
       z-index: 4;
     }
 
-    @media (max-width: 1023px) {
-      .background-video-overlay {
-        display: block; /* Show overlay video only on smaller screens */
-      }
-    }
-
     @media (max-width: 768px) {
       nav ul li a {
         font-size: 14px;
@@ -173,7 +173,7 @@
       </iframe>
     </div>
 
-    <!-- Overlay Background Video (second video) -->
+    <!-- Overlay Background Video -->
     <div class="background-video-overlay">
       <iframe
         src="https://player.vimeo.com/video/1078142628?h=fec008f5ca&autoplay=1&loop=1&muted=1&background=1"
@@ -227,6 +227,20 @@
       const dropdown = document.getElementById('contact-dropdown');
       dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
     }
+
+    // Adjust background video height to fit the screen size on mobile devices
+    function adjustBackgroundVideo() {
+      const videoDesktop = document.querySelector('.background-video-desktop iframe');
+      const videoOverlay = document.querySelector('.background-video-overlay iframe');
+      const viewportHeight = window.innerHeight;
+
+      videoDesktop.style.height = `${viewportHeight}px`;
+      videoOverlay.style.height = `${viewportHeight}px`;
+    }
+
+    // Call the adjust function on window resize and load
+    window.addEventListener('resize', adjustBackgroundVideo);
+    window.addEventListener('load', adjustBackgroundVideo);
   </script>
 
 </body>
