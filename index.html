@@ -18,58 +18,46 @@
     /* --- Desktop Vimeo --- */
     .background-video.desktop {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: 0;
-      overflow: hidden;
-      display: block;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      z-index: 0; overflow: hidden;
     }
     .background-video.desktop iframe {
       position: absolute;
-      top: 50%;
-      left: 50%;
+      top: 50%; left: 50%;
       transform: translate(-50%, -50%);
-      width: 100vw;
-      height: 56.25vw; /* 16:9 */
-      min-height: 100vh;
-      min-width: 177.77vh;
+      width: 100vw; height: 56.25vw; /* 16:9 */
+      min-width: 177.78vh; min-height: 100vh;
       border: none;
     }
 
     /* --- Mobile MP4 --- */
     .background-video.mobile {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: 0;
-      overflow: hidden;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      z-index: 0; overflow: hidden;
       display: none;
     }
     .background-video.mobile video {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      object-fit: cover; /* Ensures full coverage */
-      object-position: center center; /* Ensures video is centered */
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      /* natural sizing plus minimum fill */
+      width: auto; 
+      height: auto;
+      min-width: 100%; 
+      min-height: 100%;
+      /* no object-fit here */
     }
 
-    /* Media query for mobile: show MP4 video and hide Vimeo */
+    /* swap at tablet breakpoint */
     @media (max-width: 1023px) {
-      .background-video.desktop {
-        display: none;
-      }
-      .background-video.mobile {
-        display: block;
-      }
+      .background-video.desktop { display: none; }
+      .background-video.mobile  { display: block; }
     }
 
-    /* Foreground content styles */
+    /* Foreground content */
     .foreground {
       position: relative;
       z-index: 1;
@@ -77,47 +65,25 @@
       display: flex;
       flex-direction: column;
     }
-
     header {
-      position: absolute;
-      top: 20px;
-      right: 0;
-      width: 120px;
-      z-index: 2;
+      position: absolute; top: 20px; right: 0;
+      width: 120px; z-index: 2;
     }
-
-    nav ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      text-align: center;
-    }
-
-    nav ul li {
-      margin-bottom: 10px;
-    }
-
+    nav ul { list-style: none; padding: 0; margin: 0; text-align: center; }
+    nav ul li { margin-bottom: 10px; }
     nav ul li a {
-      color: white;
-      text-decoration: none;
-      font-size: 13px;
+      color: white; text-decoration: none; font-size: 13px;
     }
-
     nav ul li ul {
-      display: none;
-      margin-top: 10px;
+      display: none; margin-top: 10px;
     }
-
     nav ul li ul li a {
-      font-size: 12px;
-      font-style: italic;
+      font-size: 12px; font-style: italic;
     }
-
     nav ul li a:hover,
     nav ul li ul li a:hover {
       color: red;
     }
-
     main {
       flex-grow: 1;
       display: flex;
@@ -125,40 +91,28 @@
       align-items: center;
       padding: 20px;
     }
-
     .main-image {
       max-width: 100%;
       height: auto;
       z-index: 2;
     }
-
     footer {
       position: fixed;
-      bottom: 0;
-      left: 50%;
+      bottom: 0; left: 50%;
       transform: translateX(-50%);
-      color: white;
-      font-size: 10px;
-      padding: 10px;
-      text-align: center;
-      font-family: Arial, sans-serif;
+      color: white; font-size: 10px;
+      padding: 10px; text-align: center;
       z-index: 2;
     }
-
     @media (max-width: 768px) {
-      nav ul li a {
-        font-size: 14px;
-      }
-
-      footer {
-        font-size: 1vw;
-      }
+      nav ul li a { font-size: 14px; }
+      footer { font-size: 1vw; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Fullscreen Vimeo Background Video (Desktop Only) -->
+  <!-- Desktop Vimeo -->
   <div class="background-video desktop">
     <iframe
       src="https://player.vimeo.com/video/1078142628?h=fec008f5ca&autoplay=1&loop=1&muted=1&background=1"
@@ -168,7 +122,7 @@
     ></iframe>
   </div>
 
-  <!-- Fullscreen Mobile MP4 Background Video -->
+  <!-- Mobile MP4 -->
   <div class="background-video mobile">
     <video
       src="vertical.mp4"
@@ -185,14 +139,14 @@
       <nav>
         <ul>
           <li>
-            <a href="javascript:void(0)" onclick="toggleProjects(this)">PROJECTS</a>
+            <a href="javascript:void(0)" onclick="toggleProjects()">PROJECTS</a>
             <ul id="projects-dropdown">
               <li><a href="https://youtu.be/TCYbkjs_BI4?si=rcAzeJgQho_4Lf4s">CRASHER</a></li>
               <li><a href="https://vimeo.com/1017972578" target="_blank">RESURGE</a></li>
             </ul>
           </li>
           <li>
-            <a href="javascript:void(0)" onclick="toggleContact(this)">LINKS</a>
+            <a href="javascript:void(0)" onclick="toggleContact()">LINKS</a>
             <ul id="contact-dropdown">
               <li><a href="https://www.instagram.com/thevaskezbrothers" target="_blank">INSTAGRAM</a></li>
               <li><a href="https://www.youtube.com/@TheVaskezBrothers" target="_blank">YOUTUBE</a></li>
@@ -214,14 +168,13 @@
   </div>
 
   <script>
-    function toggleProjects(element) {
-      const dropdown = document.getElementById('projects-dropdown');
-      dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+    function toggleProjects() {
+      const d = document.getElementById('projects-dropdown');
+      d.style.display = d.style.display === 'block' ? 'none' : 'block';
     }
-
-    function toggleContact(element) {
-      const dropdown = document.getElementById('contact-dropdown');
-      dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+    function toggleContact() {
+      const d = document.getElementById('contact-dropdown');
+      d.style.display = d.style.display === 'block' ? 'none' : 'block';
     }
   </script>
 
