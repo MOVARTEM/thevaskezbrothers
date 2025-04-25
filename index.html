@@ -215,27 +215,36 @@
       <p>&copy; 2025 MOVARTEM INC. All rights reserved.</p>
     </footer>
   </div>
+<script>
+  // Safari/Chrome 100vh fix
+  function setVh() {
+    document.documentElement.style.setProperty(
+      '--vh',
+      `${window.innerHeight * 0.01}px`
+    );
+  }
+  setVh();
+  window.addEventListener('resize', setVh);
 
-  <script>
-    // Safari/Chrome 100vh fix
-    function setVh() {
-      document.documentElement.style.setProperty(
-        '--vh',
-        `${window.innerHeight * 0.01}px`
-      );
-    }
-    setVh();
-    window.addEventListener('resize', setVh);
+  function toggleProjects() {
+    const projects = document.getElementById('projects-dropdown');
+    const contact  = document.getElementById('contact-dropdown');
+    // always close the other dropdown
+    contact.style.display = 'none';
+    // then toggle this one
+    projects.style.display = projects.style.display === 'block' ? 'none' : 'block';
+  }
 
-    function toggleProjects() {
-      const d = document.getElementById('projects-dropdown');
-      d.style.display = d.style.display === 'block' ? 'none' : 'block';
-    }
-    function toggleContact() {
-      const d = document.getElementById('contact-dropdown');
-      d.style.display = d.style.display === 'block' ? 'none' : 'block';
-    }
-  </script>
+  function toggleContact() {
+    const projects = document.getElementById('projects-dropdown');
+    const contact  = document.getElementById('contact-dropdown');
+    // always close the other dropdown
+    projects.style.display = 'none';
+    // then toggle this one
+    contact.style.display = contact.style.display === 'block' ? 'none' : 'block';
+  }
+</script>
+
 
 </body>
 </html>
