@@ -135,8 +135,9 @@
       z-index: 6; /* Ensure the image is on top */
     }
 
+    /* Ensure the footer stays at the bottom and on top of video layers */
     footer {
-      position: absolute;
+      position: fixed;
       bottom: 0;
       left: 50%;
       transform: translateX(-50%);
@@ -145,7 +146,7 @@
       padding: 10px;
       text-align: center;
       font-family: Arial, sans-serif;
-      z-index: 4;
+      z-index: 10; /* Ensure the footer stays above everything */
     }
 
     @media (max-width: 768px) {
@@ -227,20 +228,6 @@
       const dropdown = document.getElementById('contact-dropdown');
       dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
     }
-
-    // Adjust background video height to fit the screen size on mobile devices
-    function adjustBackgroundVideo() {
-      const videoDesktop = document.querySelector('.background-video-desktop iframe');
-      const videoOverlay = document.querySelector('.background-video-overlay iframe');
-      const viewportHeight = window.innerHeight;
-
-      videoDesktop.style.height = `${viewportHeight}px`;
-      videoOverlay.style.height = `${viewportHeight}px`;
-    }
-
-    // Call the adjust function on window resize and load
-    window.addEventListener('resize', adjustBackgroundVideo);
-    window.addEventListener('load', adjustBackgroundVideo);
   </script>
 
 </body>
