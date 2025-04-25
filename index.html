@@ -35,7 +35,7 @@
       border: none;
     }
 
-    /* --- Mobile MP4 --- */
+    /* --- Mobile Vimeo --- */
     .background-video.mobile {
       position: fixed;
       top: 0; left: 0;
@@ -44,17 +44,16 @@
       overflow: hidden;
       display: none;
     }
-    .background-video.mobile video {
+    .background-video.mobile iframe {
       position: absolute;
       top: 50%; left: 50%;
       transform: translate(-50%, -50%);
-      width: auto;
+      width: 100vw;
       height: 100vh;
-      min-width: 100vw;
-      object-fit: cover;
+      border: none;
     }
 
-    /* Media query for mobile: show MP4 video and hide Vimeo */
+    /* Media query for mobile: show Vimeo video and hide Desktop Vimeo */
     @media (max-width: 1023px) {
       .background-video.desktop {
         display: none;
@@ -163,15 +162,14 @@
     ></iframe>
   </div>
 
-  <!-- Fullscreen Mobile MP4 Background Video -->
+  <!-- Fullscreen Vimeo Video (Mobile Only) -->
   <div class="background-video mobile">
-    <video
-      src="vertical.mp4"
-      autoplay
-      loop
-      muted
-      playsinline
-    ></video>
+    <iframe
+      src="https://player.vimeo.com/video/1078821839?autoplay=1&loop=1&muted=1"
+      allow="autoplay; fullscreen"
+      allowfullscreen
+      title="mobile-vimeo-player"
+    ></iframe>
   </div>
 
   <!-- Foreground Content -->
