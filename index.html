@@ -15,7 +15,7 @@
       color: white;
     }
 
-    /* --- Desktop Vimeo (Background) --- */
+    /* --- Desktop Vimeo --- */
     .background-video.desktop {
       position: fixed;
       top: 0; left: 0;
@@ -28,12 +28,14 @@
       position: absolute;
       top: 50%; left: 50%;
       transform: translate(-50%, -50%);
-      width: 100%;
-      height: 100%;
+      width: 100vw;
+      height: 56.25vw; /* 16:9 */
+      min-height: 100vh;
+      min-width: 177.77vh;
       border: none;
     }
 
-    /* --- Mobile Vimeo (Background) --- */
+    /* --- Mobile MP4 --- */
     .background-video.mobile {
       position: fixed;
       top: 0; left: 0;
@@ -42,16 +44,17 @@
       overflow: hidden;
       display: none;
     }
-    .background-video.mobile iframe {
+    .background-video.mobile video {
       position: absolute;
       top: 50%; left: 50%;
       transform: translate(-50%, -50%);
-      width: 100%;
-      height: 100%;
-      border: none;
+      width: auto;
+      height: 100vh;
+      min-width: 100vw;
+      object-fit: cover;
     }
 
-    /* Media query for mobile: show Vimeo video and hide Desktop Vimeo */
+    /* Media query for mobile: show MP4 video and hide Vimeo */
     @media (max-width: 1023px) {
       .background-video.desktop {
         display: none;
@@ -160,14 +163,15 @@
     ></iframe>
   </div>
 
-  <!-- Fullscreen Vimeo Video (Mobile Only) -->
+  <!-- Fullscreen Mobile MP4 Background Video -->
   <div class="background-video mobile">
-    <iframe
-      src="https://player.vimeo.com/video/1078821839?h=e3c853c5a4&autoplay=1&loop=1&muted=1&title=0&byline=0&portrait=0"
-      allow="autoplay; fullscreen; picture-in-picture"
-      allowfullscreen
-      title="Timeline 2"
-    ></iframe>
+    <video
+      src="vertical.mp4"
+      autoplay
+      loop
+      muted
+      playsinline
+    ></video>
   </div>
 
   <!-- Foreground Content -->
