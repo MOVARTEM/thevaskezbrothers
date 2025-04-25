@@ -5,6 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>The Vaskez Brothers</title>
   <style>
+    :root {
+      /* will be set via JS to account for mobile browser UI */
+      --vh: 1vh;
+    }
+
     html, body {
       margin: 0;
       padding: 0;
@@ -15,38 +20,47 @@
       color: white;
     }
 
-    /* --- Desktop Vimeo --- */
+    /* --- Desktop Vimeo Background --- */
     .background-video.desktop {
       position: fixed;
       top: 0; left: 0;
-      width: 100vw; height: 100vh;
-      z-index: 0; overflow: hidden;
+      width: 100vw;
+      height: calc(var(--vh) * 100);
+      z-index: 0;
+      overflow: hidden;
       display: block;
     }
     .background-video.desktop iframe {
       position: absolute;
       top: 50%; left: 50%;
       transform: translate(-50%, -50%);
-      width: 100vw; height: 56.25vw; /* 16:9 */
-      min-width: 177.78vh; min-height: 100vh;
+      width: 100vw;
+      height: 56.25vw; /* 16:9 aspect */
+      min-width: 177.78vh;
+      min-height: 100vh;
       border: none;
     }
 
-    /* --- Mobile MP4 Background Video --- */
+    /* --- Mobile MP4 Background --- */
     .background-video.mobile {
       position: fixed;
       top: 0; left: 0;
-      width: 100vw; height: 100vh;
-      z-index: 0; overflow: hidden;
+      width: 100vw;
+      height: calc(var(--vh) * 100);
+      z-index: 0;
+      overflow: hidden;
       display: none;
     }
     .background-video.mobile video {
+      display: block; /* required for WebKit object-fit */
       position: absolute;
       top: 0; left: 0;
       width: 100%;
       height: 100%;
-      object-fit: cover;       /* scale+crop to fill */
-      object-position: center; /* center the crop */
+      object-fit: cover;
+      object-position: center center;
+      -webkit-object-fit: cover;
+      -webkit-object-position: center center;
     }
 
     /* swap at tablet breakpoint */
@@ -59,24 +73,37 @@
     .foreground {
       position: relative;
       z-index: 1;
-      height: 100vh;
+      height: calc(var(--vh) * 100);
       display: flex;
       flex-direction: column;
     }
     header {
-      position: absolute; top: 20px; right: 0;
-      width: 120px; z-index: 2;
+      position: absolute;
+      top: 20px; right: 0;
+      width: 120px;
+      z-index: 2;
     }
-    nav ul { list-style: none; padding: 0; margin: 0; text-align: center; }
-    nav ul li { margin-bottom: 10px; }
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      text-align: center;
+    }
+    nav ul li {
+      margin-bottom: 10px;
+    }
     nav ul li a {
-      color: white; text-decoration: none; font-size: 13px;
+      color: white;
+      text-decoration: none;
+      font-size: 13px;
     }
     nav ul li ul {
-      display: none; margin-top: 10px;
+      display: none;
+      margin-top: 10px;
     }
     nav ul li ul li a {
-      font-size: 12px; font-style: italic;
+      font-size: 12px;
+      font-style: italic;
     }
     nav ul li a:hover,
     nav ul li ul li a:hover {
@@ -98,8 +125,10 @@
       position: fixed;
       bottom: 0; left: 50%;
       transform: translateX(-50%);
-      color: white; font-size: 10px;
-      padding: 10px; text-align: center;
+      color: white;
+      font-size: 10px;
+      padding: 10px;
+      text-align: center;
       z-index: 2;
     }
     @media (max-width: 768px) {
@@ -110,7 +139,7 @@
 </head>
 <body>
 
-  <!-- Desktop Vimeo Background Video -->
+  <!-- Desktop Vimeo Background -->
   <div class="background-video desktop">
     <iframe
       src="https://player.vimeo.com/video/1078142628?h=fec008f5ca&autoplay=1&loop=1&muted=1&background=1"
@@ -120,7 +149,7 @@
     ></iframe>
   </div>
 
-  <!-- Mobile MP4 Background Video -->
+  <!-- Mobile MP4 Background -->
   <div class="background-video mobile">
     <video
       src="vertical.mp4"
@@ -166,6 +195,16 @@
   </div>
 
   <script>
+    // Safari/Chrome 100vh fix
+    function setVh() {
+      document.documentElement.style.setProperty(
+        '--vh',
+        `${window.innerHeight * 0.01}px`
+      );
+    }
+    setVh();
+    window.addEventListener('resize', setVh);
+
     function toggleProjects() {
       const d = document.getElementById('projects-dropdown');
       d.style.display = d.style.display === 'block' ? 'none' : 'block';
