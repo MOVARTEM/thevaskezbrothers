@@ -49,26 +49,20 @@
 
     .background-video-overlay {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: 2; /* Overlay video layer */
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 10vh 5vw; /* Thin margin around the video */
-    }
-
-    .background-video-overlay iframe {
-      position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
       width: auto;
       height: auto;
-      max-width: 90vw; /* Smaller video with margin */
-      max-height: 50vw;
+      z-index: 2; /* Overlay video layer */
+      display: none; /* Hide by default */
+      max-width: 90vw; /* Smaller width with margin */
+      max-height: 50vw; /* Ensure the height respects the width */
+    }
+
+    .background-video-overlay iframe {
+      width: 100%;
+      height: 100%;
       border: none;
     }
 
@@ -148,6 +142,12 @@
       z-index: 4;
     }
 
+    @media (max-width: 1023px) {
+      .background-video-overlay {
+        display: block; /* Show overlay video only on smaller screens */
+      }
+    }
+
     @media (max-width: 768px) {
       nav ul li a {
         font-size: 14px;
@@ -173,7 +173,7 @@
       </iframe>
     </div>
 
-    <!-- Overlay Background Video -->
+    <!-- Overlay Background Video (second video) -->
     <div class="background-video-overlay">
       <iframe
         src="https://player.vimeo.com/video/1078142628?h=fec008f5ca&autoplay=1&loop=1&muted=1&background=1"
