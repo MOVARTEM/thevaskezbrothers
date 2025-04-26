@@ -8,6 +8,11 @@
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://thevaskezbrothers.com/" />
 
+  <!-- Preconnect & Preload -->
+  <link rel="preconnect" href="https://player.vimeo.com" />
+  <link rel="preload" href="https://thevaskezbrothers.com/og-image.jpg" as="image" />
+  <link rel="preload" href="vertical.mp4" as="video" type="video/mp4" />
+
   <!-- Open Graph / Facebook -->
   <meta property="og:title" content="The Vaskez Brothers – Independent Filmmakers" />
   <meta property="og:description" content="The Vaskez Brothers craft cinematic stories of crime and redemption. Explore our short films 'CRASHER' and 'RESURGE'." />
@@ -24,24 +29,37 @@
 
   <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "The Vaskez Brothers",
-      "url": "https://thevaskezbrothers.com/",
-      "logo": "https://thevaskezbrothers.com/logo.png",
-      "sameAs": [
-        "https://www.instagram.com/thevaskezbrothers",
-        "https://www.youtube.com/@TheVaskezBrothers",
-        "https://vimeo.com/user228439326"
-      ],
-      "description": "Independent filmmakers creating high-energy crime narratives and visual storytelling."
-    }
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "The Vaskez Brothers",
+    "url": "https://thevaskezbrothers.com/",
+    "logo": "https://thevaskezbrothers.com/logo.png",
+    "sameAs": [
+      "https://www.instagram.com/thevaskezbrothers",
+      "https://www.youtube.com/@TheVaskezBrothers",
+      "https://vimeo.com/user228439326"
+    ],
+    "description": "Independent filmmakers creating high-energy crime narratives and visual storytelling."
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "name": "Background Cinematic Video",
+    "description": "Cinematic background video from The Vaskez Brothers.",
+    "thumbnailUrl": "https://thevaskezbrothers.com/og-image.jpg",
+    "uploadDate": "2024-10-01",
+    "contentUrl": "https://player.vimeo.com/video/1078142628?h=fec008f5ca",
+    "embedUrl": "https://player.vimeo.com/video/1078142628?h=fec008f5ca"
+  }
   </script>
 
   <style>
     :root { --vh: 1vh; }
     html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; font-family: Helvetica, Arial, sans-serif; background: #000; color: #fff; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
 
     /* Desktop Vimeo Background */
     .background-video.desktop { position: fixed; top: 0; left: 0; width: 100vw; height: calc(var(--vh) * 100); z-index: 0; overflow: hidden; }
@@ -68,7 +86,6 @@
 
     /* Submenu default hidden */
     nav ul li ul { display: none; list-style: none; margin: 0; padding: 0; }
-    /* Show when .open */
     nav ul li ul.open { display: block; }
 
     /* Desktop hover behavior */
@@ -81,20 +98,35 @@
     @media (max-width: 768px) {
       nav ul li a { font-size: 11px; }
       nav ul li ul li a { font-size: 9px; }
-      footer { font-size: 4vw; white-space: nowrap; }
     }
 
     main { flex-grow: 1; display: flex; justify-content: center; align-items: center; padding: 20px; }
     .main-image { max-width: 100%; height: auto; z-index: 2; }
-    footer { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); padding: 10px; font-size: 0.55vw; text-align: center; z-index: 2; }
+
+    footer {
+      position: fixed;
+      bottom: 0; left: 50%; transform: translateX(-50%);
+      padding: 10px;
+      font-size: 0.55vw;
+      text-align: center;
+      white-space: nowrap;
+      z-index: 2;
+    }
+
+    /* Mobile footer override */
+    @media (max-width: 768px) {
+      footer {
+        font-size: 1.5vw;
+      }
+    }
   </style>
 </head>
 <body>
-  <div class="background-video desktop">
+  <div class="background-video desktop" aria-hidden="true">
     <iframe src="https://player.vimeo.com/video/1078142628?h=fec008f5ca&autoplay=1&loop=1&muted=1&background=1" allow="autoplay; fullscreen" allowfullscreen title="Cinematic background video: The Vaskez Brothers"></iframe>
   </div>
 
-  <div class="background-video mobile">
+  <div class="background-video mobile" aria-hidden="true">
     <video src="vertical.mp4" autoplay loop muted playsinline aria-label="Cinematic background video"></video>
   </div>
 
@@ -122,8 +154,8 @@
       </nav>
     </header>
 
-    <main role="main">
-      <img src="Test 1.png" alt="The Vaskez Brothers logo" class="main-image" />
+    <main>
+      <img src="Test 1.png" alt="The Vaskez Brothers logo" class="main-image" loading="lazy" />
     </main>
 
     <footer role="contentinfo">
@@ -133,11 +165,8 @@
 
   <script>
     // Safari/Chrome 100vh fix
-    function setVh() {
-      document.documentElement.style.setProperty('--vh', window.innerHeight * 0.01 + 'px');
-    }
-    setVh();
-    window.addEventListener('resize', setVh);
+    function setVh() { document.documentElement.style.setProperty('--vh', window.innerHeight * 0.01 + 'px'); }
+    setVh(); window.addEventListener('resize', setVh);
 
     // Mobile dropdown toggle
     document.addEventListener('DOMContentLoaded', function() {
@@ -148,9 +177,7 @@
             e.preventDefault();
             var submenu = this.nextElementSibling;
             if (submenu) {
-              document.querySelectorAll('nav ul li ul.open').forEach(function(open) {
-                open.classList.remove('open');
-              });
+              document.querySelectorAll('nav ul li ul.open').forEach(function(open) { open.classList.remove('open'); });
               submenu.classList.toggle('open');
             }
           }
@@ -158,9 +185,7 @@
       });
       document.addEventListener('click', function(e) {
         if (window.innerWidth <= 1023 && !e.target.closest('nav')) {
-          document.querySelectorAll('nav ul li ul.open').forEach(function(open) {
-            open.classList.remove('open');
-          });
+          document.querySelectorAll('nav ul li ul.open').forEach(function(open) { open.classList.remove('open'); });
         }
       });
     });
