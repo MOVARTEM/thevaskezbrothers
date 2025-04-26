@@ -15,7 +15,7 @@
       padding: 0;
       height: 100%;
       overflow: hidden;
-      font-family: Helvetica;
+      font-family: Helvetica, Arial, sans-serif;
       font-weight: normal;
       background-color: black;
       color: white;
@@ -53,7 +53,7 @@
       display: none;
     }
     .background-video.mobile video {
-      display: block; /* required for WebKit object-fit */
+      display: block;
       position: absolute;
       top: 0; left: 0;
       width: 100%;
@@ -70,7 +70,7 @@
       .background-video.mobile  { display: block; }
     }
 
-    /* Foreground content */
+    /* --- Foreground content --- */
     .foreground {
       position: relative;
       z-index: 1;
@@ -86,40 +86,58 @@
     }
     nav ul {
       list-style: none;
-      padding: 0;
       margin: 0;
+      padding: 0;
       text-align: center;
     }
     nav ul li {
-      margin-bottom: 10px;
+      position: relative;
+      margin: 0;
+    }
+    /* space between top‐level items */
+    nav ul li + li {
+      margin-top: 10px;
     }
     nav ul li a {
+      display: block;
+      padding: 6px 0;
       color: white;
       text-decoration: none;
       font-size: 13px;
       transition: opacity 0.2s;
     }
+
+    /* submenu in‐flow so it pushes content down */
     nav ul li ul {
       display: none;
-      margin-top: 10px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
     }
     nav ul li ul li a {
+      padding: 4px 0;
       font-size: 12px;
       font-style: italic;
       color: white;
+      font-weight: normal;
       transition: opacity 0.2s;
-           font-weight: normal;
     }
 
-    /* only lower opacity of the hovered link on non-mobile */
+    /* desktop hover behavior */
     @media (min-width: 1024px) {
+      /* show submenu on hover/focus */
+      nav ul li:hover > ul,
+      nav ul li:focus-within > ul {
+        display: block;
+      }
+      /* fade only the hovered link */
       nav ul li > a:hover,
       nav ul li ul li a:hover {
         opacity: 0.7;
       }
     }
 
-    /* adjust sizes for mobile */
+    /* mobile tweaks */
     @media (max-width: 768px) {
       nav ul li a {
         font-size: 11px;
@@ -127,14 +145,15 @@
       nav ul li ul li a {
         font-size: 9px;
       }
-      nav ul li {
-        margin-bottom: 1px;  /* was 10px */
+      /* tighten spacing */
+      nav ul li + li {
+        margin-top: 1px;
       }
       nav ul li ul {
         margin-top: 1px;
       }
       footer {
-        font-size: 1vw;  /* tiny on mobile */
+        font-size: 1.5vw;     /* a bit bigger on mobile */
         white-space: nowrap;
       }
     }
@@ -207,14 +226,14 @@
       <nav>
         <ul>
           <li>
-            <a href="javascript:void(0)" onclick="toggleProjects()">PROJECTS</a>
+            <a href="#">PROJECTS</a>
             <ul id="projects-dropdown">
               <li><a href="https://youtu.be/TCYbkjs_BI4?si=rcAzeJgQho_4Lf4s">CRASHER</a></li>
               <li><a href="https://vimeo.com/1017972578" target="_blank">RESURGE</a></li>
             </ul>
           </li>
           <li>
-            <a href="javascript:void(0)" onclick="toggleContact()">LINKS</a>
+            <a href="#">LINKS</a>
             <ul id="contact-dropdown">
               <li><a href="https://www.instagram.com/thevaskezbrothers" target="_blank">INSTAGRAM</a></li>
               <li><a href="https://www.youtube.com/@TheVaskezBrothers" target="_blank">YOUTUBE</a></li>
@@ -245,20 +264,6 @@
     }
     setVh();
     window.addEventListener('resize', setVh);
-
-    function toggleProjects() {
-      const projects = document.getElementById('projects-dropdown');
-      const contact  = document.getElementById('contact-dropdown');
-      contact.style.display = 'none';
-      projects.style.display = projects.style.display === 'block' ? 'none' : 'block';
-    }
-
-    function toggleContact() {
-      const projects = document.getElementById('projects-dropdown');
-      const contact  = document.getElementById('contact-dropdown');
-      projects.style.display = 'none';
-      contact.style.display = contact.style.display === 'block' ? 'none' : 'block';
-    }
   </script>
 
 </body>
