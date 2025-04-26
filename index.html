@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Vaskez Brothers | Independent Filmmakers | Movartem Studios</title>
+  <title>The Vaskez Brothers</title>
   <meta name="description" content="The Vaskez Brothers craft cinematic stories of crime and redemption. Explore our short films 'CRASHER' and 'RESURGE', behind-the-scenes content, and connect with us on Instagram, YouTube, and Vimeo." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://thevaskezbrothers.com/" />
@@ -11,7 +11,7 @@
   <!-- Preconnect & Preload -->
   <link rel="preconnect" href="https://player.vimeo.com" />
   <link rel="preload" href="https://thevaskezbrothers.com/og-image.jpg" as="image" />
-  <link rel="preload" href="Compilation.mp4" as="video" type="video/mp4" />
+  <link rel="preload" href="vertical.mp4" as="video" type="video/mp4" />
 
   <!-- Open Graph / Facebook -->
   <meta property="og:title" content="The Vaskez Brothers – Independent Filmmakers" />
@@ -24,7 +24,7 @@
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="The Vaskez Brothers – Independent Filmmakers" />
-  <meta name="twitter:description" content="The VaskezBrothers craft cinematic stories of crime and redemption. Explore our short films 'CRASHER' and 'RESURGE'." />
+  <meta name="twitter:description" content="The Vaskez Brothers craft cinematic stories of crime and redemption. Explore our short films 'CRASHER' and 'RESURGE'." />
   <meta name="twitter:image" content="https://thevaskezbrothers.com/og-image.jpg" />
 
   <!-- JSON-LD Structured Data -->
@@ -33,7 +33,6 @@
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "The Vaskez Brothers",
-    "alternateName": "thevaskezbrothers.com",
     "url": "https://thevaskezbrothers.com/",
     "logo": "https://thevaskezbrothers.com/logo.png",
     "sameAs": [
@@ -104,21 +103,31 @@
     main { flex-grow: 1; display: flex; justify-content: center; align-items: center; padding: 20px; }
     .main-image { max-width: 100%; height: auto; z-index: 2; }
 
-    footer { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); padding: 10px; font-size: 0.55vw; text-align: center; white-space: nowrap; z-index: 2; }
+    footer {
+      position: fixed;
+      bottom: 0; left: 50%; transform: translateX(-50%);
+      padding: 10px;
+      font-size: 0.55vw;
+      text-align: center;
+      white-space: nowrap;
+      z-index: 2;
+    }
 
     /* Mobile footer override */
     @media (max-width: 768px) {
-      footer p { font-size: 4vw; }
+      footer {
+        font-size: 1.5vw;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="background-video.desktop" aria-hidden="true">
+  <div class="background-video desktop" aria-hidden="true">
     <iframe src="https://player.vimeo.com/video/1078142628?h=fec008f5ca&autoplay=1&loop=1&muted=1&background=1" allow="autoplay; fullscreen" allowfullscreen title="Cinematic background video: The Vaskez Brothers"></iframe>
   </div>
 
-  <div class="background-video.mobile" aria-hidden="true">
-    <video src="Compilation.mp4" autoplay loop muted playsinline aria-label="Cinematic background video"></video>
+  <div class="background-video mobile" aria-hidden="true">
+    <video src="vertical.mp4" autoplay loop muted playsinline aria-label="Cinematic background video"></video>
   </div>
 
   <div class="foreground">
@@ -145,9 +154,8 @@
       </nav>
     </header>
 
-    <main role="main">
-      <h1 class="sr-only">The Vaskez Brothers</h1>
-      <img src="TheVaskezBrothers.png" alt="The Vaskez Brothers logo" class="main-image" />
+    <main>
+      <img src="ThevaskezBrothers.png" alt="The Vaskez Brothers logo" class="main-image" loading="lazy" />
     </main>
 
     <footer role="contentinfo">
