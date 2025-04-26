@@ -96,6 +96,7 @@
       color: white;
       text-decoration: none;
       font-size: 13px;
+      transition: opacity 0.2s;
     }
     nav ul li ul {
       display: none;
@@ -104,11 +105,40 @@
     nav ul li ul li a {
       font-size: 12px;
       font-style: italic;
+      color: white;
+      transition: opacity 0.2s;
     }
-    nav ul li a:hover,
+
+    /* only lower opacity of the hovered link */
+    nav ul li > a:hover,
     nav ul li ul li a:hover {
-      color: red;
+      opacity: 0.7;
     }
+
+    @media (max-width: 768px) {
+      nav ul li a {
+        font-size: 11px;
+      }
+      nav ul li ul li a {
+        font-size: 9px;
+      }
+      nav ul li {
+        margin-bottom: 1px;  /* was 10px */
+      }
+      nav ul li ul {
+        margin-top: 1px;
+      }
+      footer {
+        font-size: 7px;
+      }
+    }
+
+    nav ul li a:focus,
+    nav ul li a:active {
+      color: white;
+      outline: none;
+    }
+
     main {
       flex-grow: 1;
       display: flex;
@@ -126,36 +156,11 @@
       bottom: 0; left: 50%;
       transform: translateX(-50%);
       color: white;
-      font-size: 10px;
+      font-size: 12px;
       padding: 10px;
       text-align: center;
       z-index: 2;
     }
-    @media (max-width: 768px) {
-      nav ul li a {
-    font-size: 11px;
-  }
-  nav ul li ul li a {
-    font-size: 9px;
-  }
-      nav ul li {
-    margin-bottom: 1px;  /* was 10px */
-  }
-     nav ul li ul {
-    margin-top: 1px;
-  }         footer { font-size: 7px; }
-    }
-      nav ul li a:focus,
-  nav ul li a:active {
-    color: white;
-    outline: none;
-  }
-  nav ul li a:hover,
-  nav ul li ul li a:hover {
-    color: white !important;
-  }
-    }
-      footer { font-size: 1vw; }
     }
   </style>
 </head>
@@ -215,36 +220,32 @@
       <p>&copy; 2025 MOVARTEM INC. All rights reserved.</p>
     </footer>
   </div>
-<script>
-  // Safari/Chrome 100vh fix
-  function setVh() {
-    document.documentElement.style.setProperty(
-      '--vh',
-      `${window.innerHeight * 0.01}px`
-    );
-  }
-  setVh();
-  window.addEventListener('resize', setVh);
 
-  function toggleProjects() {
-    const projects = document.getElementById('projects-dropdown');
-    const contact  = document.getElementById('contact-dropdown');
-    // always close the other dropdown
-    contact.style.display = 'none';
-    // then toggle this one
-    projects.style.display = projects.style.display === 'block' ? 'none' : 'block';
-  }
+  <script>
+    // Safari/Chrome 100vh fix
+    function setVh() {
+      document.documentElement.style.setProperty(
+        '--vh',
+        `${window.innerHeight * 0.01}px`
+      );
+    }
+    setVh();
+    window.addEventListener('resize', setVh);
 
-  function toggleContact() {
-    const projects = document.getElementById('projects-dropdown');
-    const contact  = document.getElementById('contact-dropdown');
-    // always close the other dropdown
-    projects.style.display = 'none';
-    // then toggle this one
-    contact.style.display = contact.style.display === 'block' ? 'none' : 'block';
-  }
-</script>
+    function toggleProjects() {
+      const projects = document.getElementById('projects-dropdown');
+      const contact  = document.getElementById('contact-dropdown');
+      contact.style.display = 'none';
+      projects.style.display = projects.style.display === 'block' ? 'none' : 'block';
+    }
 
+    function toggleContact() {
+      const projects = document.getElementById('projects-dropdown');
+      const contact  = document.getElementById('contact-dropdown');
+      projects.style.display = 'none';
+      contact.style.display = contact.style.display === 'block' ? 'none' : 'block';
+    }
+  </script>
 
 </body>
 </html>
