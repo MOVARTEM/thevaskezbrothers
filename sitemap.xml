@@ -23,4 +23,20 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
+  <!-- YouTube Redirect Page -->
+  <url>
+    <loc>https://thevaskezbrothers.com/youtube</loc>
+    <lastmod>2025-04-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- Instagram Redirect Page -->
+  <url>
+    <loc>https://thevaskezbrothers.com/instagram</loc>
+    <lastmod>2025-04-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
 </urlset>
