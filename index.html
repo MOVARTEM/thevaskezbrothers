@@ -3,101 +3,253 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Vaskez Brothers | Independent Filmmakers | Movartem Studios</title>
-  <meta name="description" content="The Vaskez Brothers craft cinematic stories of crime and redemption. Explore our short films 'CRASHER' and 'RESURGE', behind-the-scenes content, and connect with us on Instagram, YouTube, and Vimeo." />
-  <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://thevaskezbrothers.com/" />
-
-  <!-- Open Graph / Facebook -->
-  <meta property="og:title" content="The Vaskez Brothers – Independent Filmmakers" />
-  <meta property="og:description" content="The Vaskez Brothers craft cinematic stories of crime and redemption. Explore our short films 'CRASHER' and 'RESURGE'." />
-  <meta property="og:url" content="https://thevaskezbrothers.com/" />
-  <meta property="og:image" content="https://thevaskezbrothers.com/og-image.jpg" />
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="The Vaskez Brothers" />
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="The Vaskez Brothers – Independent Filmmakers" />
-  <meta name="twitter:description" content="The Vaskez Brothers craft cinematic stories of crime and redemption. Explore our short films 'CRASHER' and 'RESURGE'." />
-  <meta name="twitter:image" content="https://thevaskezbrothers.com/og-image.jpg" />
-
-  <!-- JSON-LD Structured Data -->
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "The Vaskez Brothers",
-      "url": "https://thevaskezbrothers.com/",
-      "logo": "https://thevaskezbrothers.com/logo.png",
-      "sameAs": [
-        "https://www.instagram.com/thevaskezbrothers",
-        "https://www.youtube.com/@TheVaskezBrothers",
-        "https://vimeo.com/user228439326"
-      ],
-      "description": "Independent filmmakers creating high-energy crime narratives and visual storytelling."
-    }
-  </script>
-
+  <title>The Vaskez Brothers</title>
   <style>
-    /* Existing styles unchanged... */
+    :root {
+      /* will be set via JS to account for mobile browser UI */
+      --vh: 1vh;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      font-family: Helvetica, Arial, sans-serif;
+      font-weight: normal;
+      background-color: black;
+      color: white;
+    }
+
+    /* --- Desktop Vimeo Background --- */
+    .background-video.desktop {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: calc(var(--vh) * 100);
+      z-index: 0;
+      overflow: hidden;
+      display: block;
+    }
+    .background-video.desktop iframe {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100vw;
+      height: 56.25vw; /* 16:9 aspect */
+      min-width: 177.78vh;
+      min-height: 100vh;
+      border: none;
+    }
+
+    /* --- Mobile MP4 Background --- */
+    .background-video.mobile {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: calc(var(--vh) * 100);
+      z-index: 0;
+      overflow: hidden;
+      display: none;
+    }
+    .background-video.mobile video {
+      display: block;
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+      -webkit-object-fit: cover;
+      -webkit-object-position: center center;
+    }
+
+    /* swap at tablet breakpoint */
+    @media (max-width: 1023px) {
+      .background-video.desktop { display: none; }
+      .background-video.mobile  { display: block; }
+    }
+
+    /* --- Foreground content --- */
+    .foreground {
+      position: relative;
+      z-index: 1;
+      height: calc(var(--vh) * 100);
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      position: absolute;
+      top: 20px; right: 0;
+      width: 120px;
+      z-index: 2;
+    }
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+    nav ul li {
+      position: relative;
+      margin: 0;
+    }
+    /* space between top‐level items */
+    nav ul li + li {
+      margin-top: 1px;
+    }
+    nav ul li a {
+      display: block;
+      padding: 6px 0;
+      color: white;
+      text-decoration: none;
+      font-size: 13px;
+      transition: opacity 0.2s;
+    }
+
+    /* submenu in‐flow so it pushes content down */
+    nav ul li ul {
+      display: none;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    nav ul li ul li a {
+      padding: 4px 0;
+      font-size: 12px;
+      font-style: italic;
+      color: white;
+      font-weight: normal;
+      transition: opacity 0.2s;
+    }
+
+    /* desktop hover behavior */
+    @media (min-width: 1024px) {
+      /* show submenu on hover/focus */
+      nav ul li:hover > ul,
+      nav ul li:focus-within > ul {
+        display: block;
+      }
+      /* fade only the hovered link */
+      nav ul li > a:hover,
+      nav ul li ul li a:hover {
+        opacity: 0.7;
+      }
+    }
+
+    /* mobile tweaks */
+    @media (max-width: 768px) {
+      nav ul li a {
+        font-size: 11px;
+      }
+      nav ul li ul li a {
+        font-size: 9px;
+      }
+      /* tighten spacing */
+      nav ul li + li {
+        margin-top: 1px;
+      }
+      nav ul li ul {
+        margin-top: 1px;
+      }
+      footer {
+        font-size: 1.5vw;     /* a bit bigger on mobile */
+        white-space: nowrap;
+      }
+    }
+
+    nav ul li a:focus,
+    nav ul li a:active {
+      color: white;
+      outline: none;
+    }
+
+    main {
+      flex-grow: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    .main-image {
+      max-width: 100%;
+      height: auto;
+      z-index: 2;
+    }
+
+    /* base footer (no fixed font-size here) */
+    footer {
+      position: fixed;
+      bottom: 0; left: 50%;
+      transform: translateX(-50%);
+      color: white;
+      padding: 10px;
+      text-align: center;
+      z-index: 2;
+    }
+
+    /* large-screen footer sizing */
+    @media (min-width: 1024px) {
+      footer {
+        font-size: 0.55vw;  /* smaller on big screens */
+        white-space: normal;
+      }
+    }
   </style>
 </head>
 <body>
 
   <!-- Desktop Vimeo Background -->
-  <div class="background-video desktop" aria-hidden="true">
+  <div class="background-video desktop">
     <iframe
       src="https://player.vimeo.com/video/1078142628?h=fec008f5ca&autoplay=1&loop=1&muted=1&background=1"
       allow="autoplay; fullscreen"
       allowfullscreen
-      title="Cinematic background video: The Vaskez Brothers"
+      title="vimeo-player"
     ></iframe>
   </div>
 
   <!-- Mobile MP4 Background -->
-  <div class="background-video mobile" aria-hidden="true">
+  <div class="background-video mobile">
     <video
       src="vertical.mp4"
       autoplay
       loop
       muted
       playsinline
-      aria-label="Cinematic background video"
     ></video>
   </div>
 
   <!-- Foreground Content -->
   <div class="foreground">
-    <header role="banner">
-      <nav role="navigation" aria-label="Main navigation">
+    <header>
+      <nav>
         <ul>
           <li>
-            <a href="#" aria-haspopup="true">PROJECTS</a>
+            <a href="#">PROJECTS</a>
             <ul id="projects-dropdown">
               <li><a href="https://youtu.be/TCYbkjs_BI4?si=rcAzeJgQho_4Lf4s">CRASHER</a></li>
-              <li><a href="https://vimeo.com/1017972578" target="_blank" rel="noopener">RESURGE</a></li>
+              <li><a href="https://vimeo.com/1017972578" target="_blank">RESURGE</a></li>
             </ul>
           </li>
           <li>
-            <a href="#" aria-haspopup="true">LINKS</a>
+            <a href="#">LINKS</a>
             <ul id="contact-dropdown">
-              <li><a href="https://www.instagram.com/thevaskezbrothers" target="_blank" rel="noopener">INSTAGRAM</a></li>
-              <li><a href="https://www.youtube.com/@TheVaskezBrothers" target="_blank" rel="noopener">YOUTUBE</a></li>
+              <li><a href="https://www.instagram.com/thevaskezbrothers" target="_blank">INSTAGRAM</a></li>
+              <li><a href="https://www.youtube.com/@TheVaskezBrothers" target="_blank">YOUTUBE</a></li>
               <li><a href="mailto:movartem@outlook.com">EMAIL</a></li>
-              <li><a href="https://vimeo.com/user228439326" target="_blank" rel="noopener">VIMEO</a></li>
+              <li><a href="https://vimeo.com/user228439326" target="_blank">VIMEO</a></li>
             </ul>
           </li>
         </ul>
       </nav>
     </header>
 
-    <main role="main">
-      <h1 class="sr-only">The Vaskez Brothers</h1>
-      <img src="Test 1.png" alt="The Vaskez Brothers logo" class="main-image" />
+    <main>
+      <img src="Test 1.png" alt="Test 1" class="main-image" />
     </main>
 
-    <footer role="contentinfo">
+    <footer>
       <p>&copy; 2025 MOVARTEM INC. All rights reserved.</p>
     </footer>
   </div>
@@ -115,4 +267,4 @@
   </script>
 
 </body>
-</html>
+</html> 
