@@ -132,7 +132,7 @@
         margin-top: 1px;
       }
       footer {
-        font-size: 3px;  /* smaller on mobile */
+        font-size: 4px;  /* even smaller so it fits on one line */
       }
     }
 
@@ -163,10 +163,12 @@
       padding: 10px;
       text-align: center;
       z-index: 2;
+      white-space: nowrap; /* keep on one line */
     }
     @media (min-width: 1024px) {
       footer {
         font-size: 1vw;
+        white-space: normal;
       }
     }
   </style>
