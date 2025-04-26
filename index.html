@@ -109,12 +109,15 @@
       transition: opacity 0.2s;
     }
 
-    /* only lower opacity of the hovered link */
-    nav ul li > a:hover,
-    nav ul li ul li a:hover {
-      opacity: 0.7;
+    /* only lower opacity of the hovered link on non-mobile */
+    @media (min-width: 1024px) {
+      nav ul li > a:hover,
+      nav ul li ul li a:hover {
+        opacity: 0.7;
+      }
     }
 
+    /* adjust sizes for mobile */
     @media (max-width: 768px) {
       nav ul li a {
         font-size: 11px;
@@ -129,7 +132,7 @@
         margin-top: 1px;
       }
       footer {
-        font-size: 7px;
+        font-size: 5px;  /* smaller on mobile */
       }
     }
 
@@ -156,11 +159,15 @@
       bottom: 0; left: 50%;
       transform: translateX(-50%);
       color: white;
-      font-size: 12px;
+      font-size: 10px;
       padding: 10px;
       text-align: center;
       z-index: 2;
     }
+    @media (min-width: 1024px) {
+      footer {
+        font-size: 1vw;
+      }
     }
   </style>
 </head>
