@@ -75,9 +75,8 @@
       .background-video.mobile  { display: block; }
     }
 
-    /* Foreground content (above video) */
+    /* Foreground content */
     .foreground { position: relative; z-index: 2; height: calc(var(--vh) * 100); display: flex; flex-direction: column; }
-
     header { position: absolute; top: 20px; right: 0; width: 120px; z-index: 3; }
     nav ul { list-style: none; margin: 0; padding: 0; text-align: center; }
     nav ul li { position: relative; margin: 0; }
@@ -89,13 +88,10 @@
     nav ul li ul { display: none; list-style: none; margin: 0; padding: 0; font-style: italic; font-size: 10px; }
     nav ul li ul.open { display: block; }
 
-    /* Desktop hover: smaller gap + submenu buffer */
+    /* Desktop hover adjustments */
     @media (min-width: 1024px) {
-      nav ul li:hover > ul,
-      nav ul li:focus-within > ul { display: block; }
+      nav ul li:hover > ul, nav ul li:focus-within > ul { display: block; }
       nav ul li ul { border-top: 4px solid transparent; }
-
-      /* Logo at 90% on desktop */
       .main-image { width: 90%; height: auto; max-width: none; }
     }
 
@@ -109,15 +105,7 @@
     main { flex-grow: 1; display: flex; justify-content: center; align-items: center; padding: 20px; }
     .main-image { max-width: 100%; height: auto; position: relative; z-index: 3; }
 
-    footer {
-      position: fixed;
-      bottom: 0; left: 50%; transform: translateX(-50%);
-      padding: 10px;
-      font-size: 0.55vw;
-      text-align: center;
-      white-space: nowrap;
-      z-index: 3;
-    }
+    footer { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); padding: 10px; font-size: 0.55vw; text-align: center; white-space: nowrap; z-index: 3; }
   </style>
 </head>
 <body>
@@ -126,7 +114,15 @@
   </div>
 
   <div class="background-video mobile" aria-hidden="true">
-    <video src="Compilation.mp4" autoplay muted loop playsinline webkit-playsinline preload="auto" aria-label="Cinematic background video"></video>
+    <video src="Compilation.mp4"
+           autoplay
+           muted
+           loop
+           playsinline
+           webkit-playsinline
+           preload="auto"
+           onloadedmetadata="this.play()"
+           aria-label="Cinematic background video"></video>
   </div>
 
   <div class="foreground">
@@ -167,15 +163,8 @@
     function setVh() { document.documentElement.style.setProperty('--vh', window.innerHeight * 0.01 + 'px'); }
     setVh(); window.addEventListener('resize', setVh);
 
-    // Mobile autoplay & dropdown toggle
+    // Dropdown toggle for mobile
     document.addEventListener('DOMContentLoaded', function() {
-      // Force mobile video playback
-      var vid = document.querySelector('.background-video.mobile video');
-      if (vid) {
-        vid.play().catch(function(){});
-      }
-
-      // Dropdown toggle logic
       var links = document.querySelectorAll('nav > ul > li > a');
       links.forEach(function(link) {
         link.addEventListener('click', function(e) {
