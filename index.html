@@ -8,110 +8,70 @@
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://thevaskezbrothers.com/" />
 
-  <!-- Preconnect & Preload -->
+  <!-- Preconnect -->
   <link rel="preconnect" href="https://player.vimeo.com" />
-  <link rel="preload" href="https://thevaskezbrothers.com/og-image.jpg" as="image" />
 
-  <!-- Open Graph / Facebook -->
+  <!-- Open Graph / Twitter Card -->
   <meta property="og:title" content="The Vaskez Brothers" />
-  <meta property="og:description" content="The Vaskez Brothers. Explore our short films 'CRASHER' and 'RESURGE'." />
-  <meta property="og:url" content="https://thevaskezbrothers.com/" />
+  <meta property="og:description" content="Explore our short films 'CRASHER' and 'RESURGE'." />
   <meta property="og:image" content="https://thevaskezbrothers.com/og-image.jpg" />
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="The Vaskez Brothers" />
-
-  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="The Vaskez Brothers" />
-  <meta name="twitter:description" content="The Vaskez Brothers. Explore our short films 'CRASHER' and 'RESURGE'." />
-  <meta name="twitter:image" content="https://thevaskezbrothers.com/og-image.jpg" />
-
-  <!-- JSON-LD Structured Data -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "The Vaskez Brothers",
-    "url": "https://thevaskezbrothers.com/",
-    "logo": "https://thevaskezbrothers.com/logo.png",
-    "sameAs": [
-      "https://www.instagram.com/thevaskezbrothers",
-      "https://www.youtube.com/@TheVaskezBrothers",
-      "https://vimeo.com/user228439326"
-    ],
-    "description": "Independent filmmaking."
-  }
-  </script>
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "VideoObject",
-    "name": "Background Cinematic Video",
-    "description": "Projects compilation video from The Vaskez Brothers.",
-    "thumbnailUrl": "https://thevaskezbrothers.com/og-image.jpg",
-    "uploadDate": "2024-10-01",
-    "contentUrl": "https://player.vimeo.com/video/1078142628?h=fec008f5ca",
-    "embedUrl": "https://player.vimeo.com/video/1078142628?h=fec008f5ca"
-  }
-  </script>
 
   <style>
     :root { --vh: 1vh; }
-    html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; font-family: Helvetica, Arial, sans-serif; background: #000; color: #fff; }
+    html, body { margin:0; padding:0; height:100%; overflow:hidden; background:#000; color:#fff; font-family:Helvetica, Arial, sans-serif; }
 
     /* Desktop Vimeo Background */
     .background-video.desktop iframe {
       position: fixed;
-      top: 0; left: 0;
-      width: 100vw; height: calc(var(--vh) * 100);
-      z-index: 0;
-      overflow: hidden;
-      border: none;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100vw; height: auto;
+      min-height: 100vh;
+      z-index: 0; overflow: hidden; border: none;
     }
 
     /* Mobile Vimeo Background */
     .background-video.mobile iframe {
       position: fixed;
-      top: 0; left: 0;
-      width: 100vw; height: calc(var(--vh) * 100);
-      z-index: 0;
-      overflow: hidden;
-      border: none;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      height: 100vh; width: auto;
+      min-width: 100vw;
+      z-index: 0; overflow: hidden; border: none;
     }
 
-    /* Visibility toggles */
+    /* Toggle visibility */
     .background-video.desktop { display: block; }
     .background-video.mobile { display: none; }
-    @media (max-width: 1023px) {
-      .background-video.desktop { display: none; }
-      .background-video.mobile { display: block; }
+    @media (max-width:1023px) {
+      .background-video.desktop { display:none; }
+      .background-video.mobile { display:block; }
     }
 
     /* Foreground content */
-    .foreground { position: relative; z-index: 2; height: calc(var(--vh) * 100); display: flex; flex-direction: column; }
-    header { position: absolute; top: 20px; right: 0; width: 120px; z-index: 3; }
-    nav ul { list-style: none; margin: 0; padding: 0; text-align: center; }
-    nav ul li { position: relative; margin: 0; }
-    nav ul li + li { margin-top: 1px; }
-    nav ul li a { display: block; padding: 6px 0; color: #fff; text-decoration: none; font-size: 13px; transition: opacity 0.2s; }
-    nav ul li a:hover { opacity: 0.7; }
+    .foreground { position: relative; z-index: 2; height:100%; display:flex; flex-direction:column; }
+    header { position:absolute; top:20px; right:0; width:120px; z-index:3; }
+    nav ul { list-style:none; margin:0; padding:0; text-align:center; }
+    nav li { margin:0; position:relative; }
+    nav a { display:block; padding:6px 0; color:#fff; text-decoration:none; font-size:13px; transition:opacity .2s; }
+    nav a:hover { opacity:.7; }
+    nav ul li ul { display:none; list-style:none; margin:0; padding:0; font-style:italic; font-size:10px; border-top:4px solid transparent; }
+    nav li:hover > ul, nav li ul.open { display:block; }
 
-    nav ul li ul { display: none; margin: 0; padding: 0; font-style: italic; font-size: 10px; border-top: 4px solid transparent; }
-    nav ul li:hover > ul, nav ul li:focus-within > ul, nav ul li ul.open { display: block; }
-
-    @media (min-width: 1024px) {
-      .main-image { width: 90%; height: auto; max-width: none; }
+    @media (min-width:1024px) {
+      .main-image { width:90%; height:auto; }
     }
-    @media (max-width: 768px) {
-      nav ul li a { font-size: 11px; }
-      nav ul li ul li a { font-size: 9px; }
-      footer p { font-size: 2vw; }
+    @media (max-width:768px) {
+      nav a { font-size:11px; }
+      nav ul li ul li a { font-size:9px; }
+      footer p { font-size:2vw; }
     }
 
-    main { flex-grow: 1; display: flex; justify-content: center; align-items: center; padding: 20px; }
-    .main-image { max-width: 100%; height: auto; position: relative; z-index: 3; }
+    main { flex:1; display:flex; justify-content:center; align-items:center; padding:20px; }
+    .main-image { max-width:100%; height:auto; z-index:3; }
 
-    footer { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); padding: 10px; font-size: 0.55vw; text-align: center; white-space: nowrap; z-index: 3; }
+    footer { position:fixed; bottom:0; left:50%; transform:translateX(-50%); padding:10px; text-align:center; white-space:nowrap; z-index:3; font-size:0.55vw; }
   </style>
 </head>
 <body>
@@ -120,8 +80,8 @@
       src="https://player.vimeo.com/video/1078142628?h=fec008f5ca&autoplay=1&loop=1&muted=1&background=1"
       allow="autoplay; fullscreen"
       allowfullscreen
-      title="Compilation background video: The Vaskez Brothers"
-    ></iframe>
+      title="Desktop background video">
+    </iframe>
   </div>
 
   <div class="background-video mobile">
@@ -129,28 +89,28 @@
       src="https://player.vimeo.com/video/1081171924?title=0&byline=0&portrait=0&badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&loop=1&muted=1&background=1"
       allow="autoplay; fullscreen"
       allowfullscreen
-      title="Compilation background video: The Vaskez Brothers"
-    ></iframe>
+      title="Mobile background video">
+    </iframe>
   </div>
 
   <div class="foreground">
-    <header role="banner">
-      <nav role="navigation" aria-label="Main navigation">
+    <header>
+      <nav>
         <ul>
           <li>
-            <a href="#" aria-haspopup="true">PROJECTS</a>
+            <a href="#">PROJECTS</a>
             <ul>
               <li><a href="https://youtu.be/TCYbkjs_BI4?si=rcAzeJgQho_4Lf4s">CRASHER</a></li>
-              <li><a href="https://vimeo.com/1017972578" target="_blank" rel="noopener">RESURGE</a></li>
+              <li><a href="https://vimeo.com/1017972578" target="_blank">RESURGE</a></li>
             </ul>
           </li>
           <li>
-            <a href="#" aria-haspopup="true">LINKS</a>
+            <a href="#">LINKS</a>
             <ul>
-              <li><a href="https://www.instagram.com/thevaskezbrothers" target="_blank" rel="noopener">INSTAGRAM</a></li>
-              <li><a href="https://www.youtube.com/@TheVaskezBrothers" target="_blank" rel="noopener">YOUTUBE</a></li>
+              <li><a href="https://www.instagram.com/thevaskezbrothers" target="_blank">INSTAGRAM</a></li>
+              <li><a href="https://www.youtube.com/@TheVaskezBrothers" target="_blank">YOUTUBE</a></li>
               <li><a href="mailto:movartem@outlook.com">EMAIL</a></li>
-              <li><a href="https://vimeo.com/user228439326" target="_blank" rel="noopener">VIMEO</a></li>
+              <li><a href="https://vimeo.com/user228439326" target="_blank">VIMEO</a></li>
             </ul>
           </li>
         </ul>
@@ -158,34 +118,30 @@
     </header>
 
     <main>
-      <img src="TheVaskezBrothers.png" alt="The Vaskez Brothers logo" class="main-image" loading="lazy" />
+      <img src="TheVaskezBrothers.png" class="main-image" alt="The Vaskez Brothers logo" loading="lazy" />
     </main>
 
-    <footer role="contentinfo">
+    <footer>
       <p>&copy; 2025 MOVARTEM INC. All rights reserved.</p>
     </footer>
   </div>
 
   <script>
-    // Safari/Chrome 100vh fix
-    function setVh() { document.documentElement.style.setProperty('--vh', window.innerHeight * 0.01 + 'px'); }
+    function setVh() { document.documentElement.style.setProperty('--vh', window.innerHeight*0.01+'px'); }
     setVh(); window.addEventListener('resize', setVh);
 
-    // Mobile dropdown toggle
-    document.addEventListener('DOMContentLoaded', function() {
-      document.querySelectorAll('nav > ul > li > a').forEach(link => {
-        link.addEventListener('click', function(e) {
-          if (window.innerWidth <= 1023) {
-            e.preventDefault();
-            let submenu = this.nextElementSibling;
-            document.querySelectorAll('nav ul li ul.open').forEach(open => open.classList.remove('open'));
-            submenu && submenu.classList.toggle('open');
-          }
-        });
-      });
-      document.addEventListener('click', e => {
-        if (window.innerWidth <= 1023 && !e.target.closest('nav'))
-          document.querySelectorAll('nav ul li ul.open').forEach(open => open.classList.remove('open'));
+    document.addEventListener('DOMContentLoaded', function(){
+      const links = document.querySelectorAll('nav>ul>li>a');
+      links.forEach(link => link.addEventListener('click', e => {
+        if(window.innerWidth<=1023){ e.preventDefault();
+          const submenu=link.nextElementSibling;
+          document.querySelectorAll('nav ul li ul.open').forEach(o=>o.classList.remove('open'));
+          submenu && submenu.classList.toggle('open');
+        }
+      }));
+      document.addEventListener('click', e=>{
+        if(window.innerWidth<=1023 && !e.target.closest('nav'))
+          document.querySelectorAll('nav ul li ul.open').forEach(o=>o.classList.remove('open'));
       });
     });
   </script>
