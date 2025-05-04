@@ -262,15 +262,15 @@
 
   <!-- Scripts -->
   <script>
-    // 100vh fix for mobile
-    function setVh() {
-      document.documentElement.style.setProperty('--vh', window.innerHeight * 0.01 + 'px');
-    }
-    setVh();
-    window.addEventListener('resize', setVh);
-
-    // Mobile menu toggle + video force play
     document.addEventListener('DOMContentLoaded', function () {
+      // Viewport height fix for mobile
+      function setVh() {
+        document.documentElement.style.setProperty('--vh', window.innerHeight * 0.01 + 'px');
+      }
+      setVh();
+      window.addEventListener('resize', setVh);
+
+      // Mobile dropdown nav toggle
       const links = document.querySelectorAll('nav > ul > li > a');
       links.forEach(link => {
         link.addEventListener('click', function (e) {
@@ -291,16 +291,27 @@
         }
       });
 
-      // ✅ Force mobile video autoplay
+      // ✅ Force autoplay for mobile video
       const video = document.getElementById('mobileVideo');
       if (video) {
         video.muted = true;
         video.playsInline = true;
-        const playPromise = video.play();
-        if (playPromise !== undefined) {
-          playPromise.catch(err => {
-            console.warn('Autoplay blocked, will retry if needed:', err);
-          });
+        video.preload = 'auto';
+
+        const tryPlay = () => {
+          const playPromise = video.play();
+          if (playPromise !== undefined) {
+            playPromise.catch(err => {
+              console.warn("Autoplay blocked. Retrying...", err);
+              setTimeout(tryPlay, 300);
+            });
+          }
+        };
+
+        if (video.readyState >= 2) {
+          tryPlay();
+        } else {
+          video.addEventListener('canplay', tryPlay, { once: true });
         }
       }
     });
