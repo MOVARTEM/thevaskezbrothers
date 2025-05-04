@@ -10,6 +10,7 @@
 
   <link rel="preconnect" href="https://player.vimeo.com" />
   <link rel="preload" href="https://thevaskezbrothers.com/og-image.jpg" as="image" />
+  <link rel="preload" href="Compilation.mp4" as="video" type="video/mp4" />
 
   <!-- Open Graph / Facebook -->
   <meta property="og:title" content="The Vaskez Brothers" />
@@ -79,7 +80,7 @@
       border: none;
     }
 
-    /* Mobile Drive Background – cover and crop from bottom */
+    /* Mobile Background Video */
     .background-video.mobile {
       position: fixed; top: 0; left: 0;
       width: 100vw; height: calc(var(--vh) * 100);
@@ -94,13 +95,11 @@
       object-position: bottom center;
     }
 
-    /* Show mobile under tablet width */
     @media (max-width: 1023px) {
       .background-video.desktop { display: none; }
       .background-video.mobile  { display: block; }
     }
 
-    /* Foreground content */
     .foreground {
       position: relative; z-index: 1;
       height: calc(var(--vh) * 100);
@@ -166,13 +165,14 @@
 
   <div class="background-video mobile" aria-hidden="true">
     <video
-      src="https://drive.google.com/uc?export=download&id=1PQAm_Qfx3DoZeN0Ol9Wy7QzSlh-yj1ft"
+      src="Compilation.mp4"
       autoplay
       muted
       loop
       playsinline
       webkit-playsinline
-      aria-label="Cinematic background video">
+      preload="auto"
+      aria-label="Mobile background video">
     </video>
   </div>
 
@@ -245,3 +245,4 @@
   </script>
 </body>
 </html>
+
