@@ -11,7 +11,7 @@
   <!-- Preconnect & Preload -->
   <link rel="preconnect" href="https://player.vimeo.com" />
   <link rel="preload" href="https://thevaskezbrothers.com/og-image.jpg" as="image" />
-  <link rel="preload" href="vertical.mp4" as="video" type="video/mp4" />
+  <link rel="preload" href="Compilation.mp4" as="video" type="video/mp4" />
 
   <!-- Open Graph / Facebook -->
   <meta property="og:title" content="The Vaskez Brothers" />
@@ -129,11 +129,23 @@
 </head>
 <body>
   <div class="background-video desktop" aria-hidden="true">
-    <iframe src="https://player.vimeo.com/video/1078142628?h=fec008f5ca&autoplay=1&loop=1&muted=1&background=1" allow="autoplay; fullscreen" allowfullscreen title="Cinematic background video: The Vaskez Brothers"></iframe>
+    <iframe src="https://player.vimeo.com/video/1078142628?h=fec008f5ca&autoplay=1&loop=1&muted=1&background=1"
+            allow="autoplay; fullscreen"
+            allowfullscreen
+            title="Cinematic background video: The Vaskez Brothers"></iframe>
   </div>
 
   <div class="background-video mobile" aria-hidden="true">
-    <video src="Compilation mobile-2.mov" autoplay loop muted playsinline aria-label="Cinematic background video"></video>
+    <video
+      autoplay
+      muted
+      loop
+      playsinline
+      webkit-playsinline
+      aria-label="Cinematic background video">
+      <source src="Compilation.mp4" type="video/mp4" />
+      <!-- Fallback for older browsers -->
+    </video>
   </div>
 
   <div class="foreground">
@@ -171,11 +183,22 @@
 
   <script>
     // Safari/Chrome 100vh fix
-    function setVh() { document.documentElement.style.setProperty('--vh', window.innerHeight * 0.01 + 'px'); }
-    setVh(); window.addEventListener('resize', setVh);
+    function setVh() {
+      document.documentElement.style.setProperty('--vh', window.innerHeight * 0.01 + 'px');
+    }
+    setVh();
+    window.addEventListener('resize', setVh);
 
-    // Mobile dropdown toggle
+    // Force video play on some mobile browsers
     document.addEventListener('DOMContentLoaded', function() {
+      var vid = document.querySelector('.background-video.mobile video');
+      if (vid) {
+        vid.play().catch(function(err){
+          console.log('Mobile video playback failed:', err);
+        });
+      }
+
+      // Mobile dropdown toggle
       var links = document.querySelectorAll('nav > ul > li > a');
       links.forEach(function(link) {
         link.addEventListener('click', function(e) {
@@ -183,7 +206,9 @@
             e.preventDefault();
             var submenu = this.nextElementSibling;
             if (submenu) {
-              document.querySelectorAll('nav ul li ul.open').forEach(function(open) { open.classList.remove('open'); });
+              document.querySelectorAll('nav ul li ul.open').forEach(function(open) {
+                open.classList.remove('open');
+              });
               submenu.classList.toggle('open');
             }
           }
@@ -191,7 +216,9 @@
       });
       document.addEventListener('click', function(e) {
         if (window.innerWidth <= 1023 && !e.target.closest('nav')) {
-          document.querySelectorAll('nav ul li ul.open').forEach(function(open) { open.classList.remove('open'); });
+          document.querySelectorAll('nav ul li ul.open').forEach(function(open) {
+            open.classList.remove('open');
+          });
         }
       });
     });
