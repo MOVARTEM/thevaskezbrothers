@@ -211,8 +211,8 @@
       muted
       playsinline
       preload="auto"
+      poster="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
       controlslist="nodownload nofullscreen noplaybackrate"
-      controls
       style="width: 100vw; height: 100vh; object-fit: cover; border: none; pointer-events: none; background: black;"
       aria-label="Mobile cinematic video">
     </video>
@@ -255,14 +255,14 @@
   <!-- Scripts -->
   <script>
     document.addEventListener('DOMContentLoaded', function () {
-      // 100vh fix for mobile
+      // 100vh fix
       function setVh() {
         document.documentElement.style.setProperty('--vh', window.innerHeight * 0.01 + 'px');
       }
       setVh();
       window.addEventListener('resize', setVh);
 
-      // Dropdown menu toggle
+      // Mobile nav toggle
       const links = document.querySelectorAll('nav > ul > li > a');
       links.forEach(link => {
         link.addEventListener('click', function (e) {
@@ -283,13 +283,9 @@
         }
       });
 
-      // Force mobile video autoplay
+      // ✅ Force autoplay for iOS Safari
       const video = document.getElementById('mobileVideo');
       if (video) {
-        video.muted = true;
-        video.playsInline = true;
-        video.preload = 'auto';
-
         const tryPlay = () => {
           const playPromise = video.play();
           if (playPromise !== undefined) {
