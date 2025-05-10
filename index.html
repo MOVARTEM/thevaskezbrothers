@@ -46,10 +46,10 @@
       transform: translate(-50%, -50%);
       width: 100vw; height: 100vh;
       object-fit: cover; border: none;
-      pointer-events: none; /* ensure clicks go to logo */
+      pointer-events: none;
     }
 
-    /* Flash animation for logo prompt */
+    /* Flash keyframes */
     @keyframes flash {
       0%, 100% { opacity: 1; }
       50%      { opacity: 0.3; }
@@ -59,42 +59,81 @@
       max-width: 100%; height: auto;
       cursor: pointer;
     }
-    .main-image.flash {
-      animation: flash 1s infinite;
-    }
 
-    .foreground { position: relative; z-index: 1; height: calc(var(--vh) * 100); display: flex; flex-direction: column; justify-content: center; align-items: center; }
+    .foreground {
+      position: relative; z-index: 1;
+      height: calc(var(--vh) * 100);
+      display: flex; flex-direction: column;
+      justify-content: center; align-items: center;
+    }
     header, footer, nav { transition: opacity 0.3s ease; }
 
-    header { position: absolute; top: 20px; right: 0; width: 120px; z-index: 3; }
+    header {
+      position: absolute; top: 20px; right: 0;
+      width: 120px; z-index: 3;
+    }
     nav ul { list-style: none; margin: 0; padding: 0; text-align: center; }
     nav ul li { position: relative; margin: 0; }
     nav ul li + li { margin-top: 1px; }
-    nav ul li a { display: block; padding: 6px 0; color: #fff; text-decoration: none; font-size: 13px; transition: opacity 0.2s; }
+    nav ul li a {
+      display: block; padding: 6px 0;
+      color: #fff; text-decoration: none;
+      font-size: 13px; transition: opacity 0.2s;
+    }
     nav ul li a:hover { opacity: 0.7; }
-    nav ul li ul { display: none; list-style: none; margin: 0; padding: 0; font-style: italic; font-size: 10px; }
+    nav ul li ul {
+      display: none; list-style: none;
+      margin: 0; padding: 0;
+      font-style: italic; font-size: 10px;
+    }
     nav ul li ul.open { display: block; }
     @media (min-width: 1024px) {
       nav ul li:hover > ul, nav ul li:focus-within > ul { display: block; }
     }
 
-    main { flex-grow: 1; display: flex; justify-content: center; align-items: center; padding: 20px; }
+    main {
+      flex-grow: 1; display: flex;
+      justify-content: center; align-items: center;
+      padding: 20px;
+    }
 
     footer {
       position: fixed; bottom: 0; left: 50%;
       transform: translateX(-50%);
       padding: 10px;
       font-size: 0.5vw;
-      text-align: center;
-      white-space: nowrap;
+      text-align: center; white-space: nowrap;
       z-index: 3;
+    }
+
+    /* Mobile-specific styles */
+    @media (max-width: 1023px) {
+      /* Flash logo only on mobile */
+      .main-image.flash {
+        animation: flash 1s infinite;
+      }
+      /* Smaller menu fonts on mobile */
+      nav ul li a {
+        font-size: 11px;
+      }
+      nav ul li ul li a {
+        font-size: 9px;
+      }
+      /* Larger footer font on mobile */
+      footer {
+        font-size: 2vw;
+      }
     }
   </style>
 </head>
 <body>
   <!-- Desktop Vimeo background -->
   <div class="background-video desktop" aria-hidden="true">
-    <iframe src="https://player.vimeo.com/video/1078142628?h=fec008f5ca&autoplay=1&loop=1&muted=1&background=1" allow="autoplay; fullscreen" allowfullscreen title="Cinematic background video"></iframe>
+    <iframe
+      src="https://player.vimeo.com/video/1078142628?h=fec008f5ca&autoplay=1&loop=1&muted=1&background=1"
+      allow="autoplay; fullscreen" allowfullscreen
+      title="Cinematic background video">
+    </iframe>
   </div>
 
   <!-- Mobile MP4 background -->
@@ -131,60 +170,4 @@
 
     <main>
       <img src="TheVaskezBrothers.png" alt="The Vaskez Brothers logo" class="main-image flash" loading="lazy" />
-    </main>
-
-    <footer role="contentinfo">
-      <p>&copy; 2025 MOVARTEM INC. All rights reserved.</p>
-    </footer>
-  </div>
-
-  <script>
-    function setVh() { document.documentElement.style.setProperty('--vh', window.innerHeight * 0.01 + 'px'); }
-    setVh(); window.addEventListener('resize', setVh);
-
-    document.addEventListener('DOMContentLoaded', () => {
-      if (window.innerWidth <= 1023) {
-        const header = document.querySelector('header');
-        const footer = document.querySelector('footer');
-        const mobileBg = document.querySelector('.background-video.mobile');
-        const vid = document.getElementById('bgvid');
-        const logo = document.querySelector('.main-image');
-
-        // initial state: hide UI and video, logo flashes
-        header.style.opacity = '0';
-        footer.style.opacity = '0';
-        mobileBg.style.opacity = '0';
-
-        logo.addEventListener('click', () => {
-          // show video and UI
-          mobileBg.style.opacity = '1';
-          header.style.opacity = '1';
-          footer.style.opacity = '1';
-          // play video
-          vid.play().catch(() => {});
-          // stop flashing
-          logo.classList.remove('flash');
-          logo.style.cursor = 'default';
-        });
-      }
-
-      // submenu toggle for mobile
-      document.querySelectorAll('nav > ul > li > a').forEach(link => {
-        link.addEventListener('click', e => {
-          if (window.innerWidth <= 1023) {
-            e.preventDefault();
-            const submenu = link.nextElementSibling;
-            document.querySelectorAll('nav ul li ul.open').forEach(o => o.classList.remove('open'));
-            submenu?.classList.toggle('open');
-          }
-        });
-      });
-      document.addEventListener('click', e => {
-        if (window.innerWidth <= 1023 && !e.target.closest('nav')) {
-          document.querySelectorAll('nav ul li ul.open').forEach(o => o.classList.remove('open'));
-        }
-      });
-    });
-  </script>
-</body>
-</html>
+    </
