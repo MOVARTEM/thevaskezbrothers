@@ -57,9 +57,6 @@
       max-width: 100%; height: auto;
       cursor: pointer;
     }
-    .main-image.flash {
-      animation: flash 0.7s infinite;
-    }
 
     .foreground {
       position: relative; z-index: 1;
@@ -89,7 +86,7 @@
     }
     nav ul li ul.open { display: block; }
     @media (min-width: 1024px) {
-      .main-image { width: 75%; height: auto; }
+      .main-image { width: 90%; height: auto; }
       nav ul li:hover > ul, nav ul li:focus-within > ul { display: block; }
     }
 
@@ -110,8 +107,14 @@
 
     /* Mobile-specific */
     @media (max-width: 1023px) {
+      /* Flash only on mobile */
+      .main-image.flash {
+        animation: flash 0.7s infinite;
+      }
+      /* Smaller menu fonts on mobile */
       nav ul li a { font-size: 11px; }
       nav ul li ul li a { font-size: 9px; }
+      /* Larger footer font on mobile */
       footer { font-size: 2vw; }
     }
   </style>
@@ -161,7 +164,7 @@
     </header>
 
     <main>
-      <img src="TheVaskezBrothers.png" alt="The Vaskez Brothers logo" class="main-image flash" loading="lazy" />
+      <img src="TheVaskezBrothers.png" alt="The Vaskez Brothers logo" class="main-image" loading="lazy" />
     </main>
 
     <footer role="contentinfo">
