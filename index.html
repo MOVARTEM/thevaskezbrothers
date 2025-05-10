@@ -1,41 +1,294 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mobile Video Only</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Vaskez Brothers</title>
+  <meta name="description" content="The Vaskez Brothers. Explore our short films 'CRASHER' and 'RESURGE' and connect with us on Instagram, YouTube, and Vimeo." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://thevaskezbrothers.com/" />
+
+  <!-- Preconnect & Preload -->
+  <link rel="preconnect" href="https://player.vimeo.com" />
+  <link rel="preload" href="https://thevaskezbrothers.com/og-image.jpg" as="image" />
+  <link rel="preload" href="Compilation.mp4" as="video" type="video/mp4" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="The Vaskez Brothers" />
+  <meta property="og:description" content="The Vaskez Brothers. Explore our short films 'CRASHER' and 'RESURGE'." />
+  <meta property="og:url" content="https://thevaskezbrothers.com/" />
+  <meta property="og:image" content="https://thevaskezbrothers.com/og-image.jpg" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="The Vaskez Brothers" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="The Vaskez Brothers" />
+  <meta name="twitter:description" content="The Vaskez Brothers. Explore our short films 'CRASHER' and 'RESURGE'." />
+  <meta name="twitter:image" content="https://thevaskezbrothers.com/og-image.jpg" />
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "The Vaskez Brothers",
+    "url": "https://thevaskezbrothers.com/",
+    "logo": "https://thevaskezbrothers.com/logo.png",
+    "sameAs": [
+      "https://www.instagram.com/thevaskezbrothers",
+      "https://www.youtube.com/@TheVaskezBrothers",
+      "https://vimeo.com/user228439326"
+    ],
+    "description": "Independent filmmaking."
+  }
+  </script>
+
   <style>
-    /* Hide on desktop, show on mobile */
-    .mobile-video {
-      display: none;
+    :root { --vh: 1vh; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      background: #000;
+      color: #fff;
+      font-family: Helvetica, Arial, sans-serif;
+    }
+
+    .background-video {
       position: fixed;
-      top: 0; left: 0;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: calc(var(--vh) * 100);
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .background-video.desktop iframe {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100vw;
+      height: 56.25vw;
+      min-width: 177.78vh;
+      min-height: 100vh;
+      object-fit: cover;
+      border: none;
+    }
+
+    .background-video.mobile {
+      display: none;
+    }
+
+    @media (max-width: 1023px) {
+      .background-video.desktop { display: none; }
+      .background-video.mobile  { display: block; }
+    }
+
+    .background-video.mobile video {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       width: 100vw;
       height: 100vh;
       object-fit: cover;
-      z-index: -1;
+      border: none;
     }
-    @media (max-width: 1023px) {
-      .mobile-video {
+
+    .foreground {
+      position: relative;
+      z-index: 1;
+      height: calc(var(--vh) * 100);
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      position: absolute;
+      top: 20px;
+      right: 0;
+      width: 120px;
+      z-index: 2;
+    }
+
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+
+    nav ul li {
+      position: relative;
+      margin: 0;
+    }
+
+    nav ul li + li {
+      margin-top: 1px;
+    }
+
+    nav ul li a {
+      display: block;
+      padding: 6px 0;
+      color: #fff;
+      text-decoration: none;
+      font-size: 13px;
+      transition: opacity 0.2s;
+    }
+
+    nav ul li a:hover {
+      opacity: 0.7;
+    }
+
+    nav ul li ul {
+      display: none;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      font-style: italic;
+      font-size: 10px;
+    }
+
+    nav ul li ul.open {
+      display: block;
+    }
+
+    @media (min-width: 1024px) {
+      nav ul li:hover > ul,
+      nav ul li:focus-within > ul {
         display: block;
       }
+      .main-image {
+        width: 90%;
+        height: auto;
+        max-width: none;
+      }
+      nav ul li ul {
+        border-top: 4px solid transparent;
+      }
+    }
+
+    @media (max-width: 768px) {
+      nav ul li a { font-size: 11px; }
+      nav ul li ul li a { font-size: 9px; }
+    }
+
+    main {
+      flex-grow: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .main-image {
+      max-width: 100%;
+      height: auto;
+      z-index: 2;
+    }
+
+    footer {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 10px;
+      font-size: 0.5vw;
+      text-align: center;
+      white-space: nowrap;
+      z-index: 2;
     }
   </style>
 </head>
 <body>
-  <!-- This will only appear (and autoplay) on screens ≤1023px wide -->
-  <video
-    class="mobile-video"
-    autoplay
-    muted
-    loop
-    playsinline
-    webkit-playsinline
-    preload="auto"
-  >
-    <source src="/Compilation.mp4" type="video/mp4">
-    <!-- Fallback text if video isn’t supported -->
-    Your browser does not support the video tag.
-  </video>
+
+  <!-- Desktop Vimeo background -->
+  <div class="background-video desktop" aria-hidden="true">
+    <iframe
+      src="https://player.vimeo.com/video/1078142628?h=fec008f5ca&autoplay=1&loop=1&muted=1&background=1"
+      allow="autoplay; fullscreen"
+      allowfullscreen
+      title="Cinematic background video"
+    ></iframe>
+  </div>
+
+  <!-- Mobile MP4 background -->
+  <div class="background-video mobile" aria-hidden="true">
+    <video autoplay muted loop playsinline webkit-playsinline preload="auto">
+      <source src="Compilation.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+  </div>
+
+  <div class="foreground">
+    <header role="banner">
+      <nav role="navigation" aria-label="Main navigation">
+        <ul>
+          <li>
+            <a href="#" aria-haspopup="true">PROJECTS</a>
+            <ul>
+              <li><a href="https://youtu.be/TCYbkjs_BI4?si=rcAzeJgQho_4Lf4s">CRASHER</a></li>
+              <li><a href="https://vimeo.com/1017972578" target="_blank" rel="noopener">RESURGE</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#" aria-haspopup="true">LINKS</a>
+            <ul>
+              <li><a href="https://www.instagram.com/thevaskezbrothers" target="_blank" rel="noopener">INSTAGRAM</a></li>
+              <li><a href="https://www.youtube.com/@TheVaskezBrothers" target="_blank" rel="noopener">YOUTUBE</a></li>
+              <li><a href="mailto:movartem@outlook.com">EMAIL</a></li>
+              <li><a href="https://vimeo.com/user228439326" target="_blank" rel="noopener">VIMEO</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <img src="TheVaskezBrothers.png" alt="The Vaskez Brothers logo" class="main-image" loading="lazy" />
+    </main>
+
+    <footer role="contentinfo">
+      <p>&copy; 2025 MOVARTEM INC. All rights reserved.</p>
+    </footer>
+  </div>
+
+  <script>
+    function setVh() {
+      document.documentElement.style.setProperty('--vh', window.innerHeight * 0.01 + 'px');
+    }
+    setVh();
+    window.addEventListener('resize', setVh);
+
+    document.addEventListener('DOMContentLoaded', function () {
+      // mobile submenu toggle
+      document.querySelectorAll('nav > ul > li > a').forEach(link => {
+        link.addEventListener('click', function (e) {
+          if (window.innerWidth <= 1023) {
+            e.preventDefault();
+            const submenu = this.nextElementSibling;
+            document.querySelectorAll('nav ul li ul.open')
+                    .forEach(open => open.classList.remove('open'));
+            submenu?.classList.toggle('open');
+          }
+        });
+      });
+
+      document.addEventListener('click', function (e) {
+        if (window.innerWidth <= 1023 && !e.target.closest('nav')) {
+          document.querySelectorAll('nav ul li ul.open')
+                  .forEach(open => open.classList.remove('open'));
+        }
+      });
+
+      // fallback ensure mobile video plays
+      const vid = document.querySelector('.background-video.mobile video');
+      if (vid) vid.play().catch(() => {});
+    });
+  </script>
 </body>
 </html>
