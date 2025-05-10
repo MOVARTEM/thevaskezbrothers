@@ -80,15 +80,19 @@
       border: none;
       object-fit: cover;
     }
-.background-video.mobile {
-  display: none;
-}
-    @media (max-width: 1023px) {
-      .background-video.desktop { display: none; }
+
+    .background-video.mobile {
+      display: none;
     }
 
-    @media (min-width: 1024px) {
-      .background-video.mobile { display: none; }
+    @media (max-width: 1023px) {
+      .background-video.desktop {
+        display: none;
+      }
+
+      .background-video.mobile {
+        display: block;
+      }
     }
 
     .foreground {
@@ -119,7 +123,9 @@
       margin: 0;
     }
 
-    nav ul li + li { margin-top: 1px; }
+    nav ul li + li {
+      margin-top: 1px;
+    }
 
     nav ul li a {
       display: block;
@@ -130,7 +136,9 @@
       transition: opacity 0.2s;
     }
 
-    nav ul li a:hover { opacity: 0.7; }
+    nav ul li a:hover {
+      opacity: 0.7;
+    }
 
     nav ul li ul {
       display: none;
@@ -141,20 +149,35 @@
       font-size: 10px;
     }
 
-    nav ul li ul.open { display: block; }
+    nav ul li ul.open {
+      display: block;
+    }
 
     @media (min-width: 1024px) {
       nav ul li:hover > ul,
-      nav ul li:focus-within > ul { display: block; }
+      nav ul li:focus-within > ul {
+        display: block;
+      }
 
-      .main-image { width: 90%; height: auto; max-width: none; }
+      .main-image {
+        width: 90%;
+        height: auto;
+        max-width: none;
+      }
 
-      nav ul li ul { border-top: 4px solid transparent; }
+      nav ul li ul {
+        border-top: 4px solid transparent;
+      }
     }
 
     @media (max-width: 768px) {
-      nav ul li a { font-size: 11px; }
-      nav ul li ul li a { font-size: 9px; }
+      nav ul li a {
+        font-size: 11px;
+      }
+
+      nav ul li ul li a {
+        font-size: 9px;
+      }
     }
 
     main {
@@ -186,21 +209,19 @@
 </head>
 <body>
 
-  <!-- Desktop video via Vimeo -->
+  <!-- Desktop Vimeo background -->
   <div class="background-video desktop" aria-hidden="true">
     <iframe src="https://player.vimeo.com/video/1078142628?h=fec008f5ca&autoplay=1&loop=1&muted=1&background=1"
-            allow="autoplay; fullscreen" allowfullscreen title="Cinematic background video: The Vaskez Brothers">
-    </iframe>
+            allow="autoplay; fullscreen"
+            allowfullscreen
+            title="Cinematic background video: The Vaskez Brothers"></iframe>
   </div>
-<video autoplay muted playsinline loop preload="auto" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1;">
-  <source src="Compilation.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
 
-  <!-- Mobile video via <video> tag -->
+  <!-- Mobile MP4 background -->
   <div class="background-video mobile" aria-hidden="true">
-    <video autoplay muted playsinline loop>
+    <video autoplay muted playsinline loop preload="auto">
       <source src="/Compilation.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
     </video>
   </div>
 
