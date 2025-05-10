@@ -175,7 +175,7 @@
     @media (max-width: 768px) {
       nav ul li a { font-size: 11px; }
       nav ul li ul li a { font-size: 9px; }
-      footer { font-size: 1vw; }
+      footer {font-size: 1vw;}
     }
 
     main {
@@ -288,11 +288,7 @@
 
       // fallback ensure mobile video plays
       const vid = document.querySelector('.background-video.mobile video');
-      function tryPlay() { vid && vid.play().catch(() => {}); }
-      tryPlay();
-      document.addEventListener('visibilitychange', () => { if (!document.hidden) tryPlay(); });
-      window.addEventListener('orientationchange', tryPlay);
-      document.body.addEventListener('touchstart', tryPlay, { once: true });
+      if (vid) vid.play().catch(() => {});
     });
   </script>
 </body>
