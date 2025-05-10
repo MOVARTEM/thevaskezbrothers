@@ -13,8 +13,6 @@
   <link rel="preload" href="https://thevaskezbrothers.com/og-image.jpg" as="image" />
   <link rel="preload" href="/Compilation.mp4" as="video" type="video/mp4" />
 
-  <!-- Open Graph & Twitter & JSON-LD omitted for brevity -->
-
   <style>
     :root { --vh: 1vh; }
     html, body {
@@ -58,6 +56,9 @@
       position: relative; z-index: 2;
       max-width: 100%; height: auto;
       cursor: pointer;
+    }
+    .main-image.flash {
+      animation: flash 1s infinite;
     }
 
     .foreground {
@@ -108,10 +109,7 @@
 
     /* Mobile-specific styles */
     @media (max-width: 1023px) {
-      /* Flash logo only on mobile */
-      .main-image.flash {
-        animation: flash 1s infinite;
-      }
+      /* Add flash only on mobile via JS */
       /* Smaller menu fonts on mobile */
       nav ul li a {
         font-size: 11px;
@@ -169,5 +167,63 @@
     </header>
 
     <main>
-      <img src="TheVaskezBrothers.png" alt="The Vaskez Brothers logo" class="main-image flash" loading="lazy" />
-    </
+      <img src="TheVaskezBrothers.png" alt="The Vaskez Brothers logo" class="main-image" loading="lazy" />
+    </main>
+
+    <footer role="contentinfo">
+      <p>&copy; 2025 MOVARTEM INC. All rights reserved.</p>
+    </footer>
+  </div>
+
+  <script>
+    function setVh() { document.documentElement.style.setProperty('--vh', window.innerHeight * 0.01 + 'px'); }
+    setVh(); window.addEventListener('resize', setVh);
+
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.innerWidth <= 1023) {
+        const header = document.querySelector('header');
+        const footer = document.querySelector('footer');
+        const mobileBg = document.querySelector('.background-video.mobile');
+        const vid = document.getElementById('bgvid');
+        const logo = document.querySelector('.main-image');
+
+        // add flash class on mobile
+        logo.classList.add('flash');
+        // initial hide UI and video
+        header.style.opacity = '0';
+        footer.style.opacity = '0';
+        mobileBg.style.opacity = '0';
+
+        logo.addEventListener('click', () => {
+          // show video and UI
+          mobileBg.style.opacity = '1';
+          header.style.opacity = '1';
+          footer.style.opacity = '1';
+          // play video
+          vid.play().catch(() => {});
+          // stop flashing
+          logo.classList.remove('flash');
+          logo.style.cursor = 'default';
+        });
+      }
+
+      // submenu toggle for mobile
+      document.querySelectorAll('nav > ul > li > a').forEach(link => {
+        link.addEventListener('click', e => {
+          if (window.innerWidth <= 1023) {
+            e.preventDefault();
+            const submenu = link.nextElementSibling;
+            document.querySelectorAll('nav ul li ul.open').forEach(o => o.classList.remove('open'));
+            submenu?.classList.toggle('open');
+          }
+        });
+      });
+      document.addEventListener('click', e => {
+        if (window.innerWidth <= 1023 && !e.target.closest('nav')) {
+          document.querySelectorAll('nav ul li ul.open').forEach(o => o.classList.remove('open'));
+        }
+      });
+    });
+  </script>
+</body>
+</html>
