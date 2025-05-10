@@ -49,15 +49,14 @@
 
     /* Flash keyframes */
     @keyframes flash {
-      0%, 100% { opacity: 1; }
-      50%      { opacity: 0.3; }
+      0%,100% { opacity: 1; }
+      50%     { opacity: 0.3; }
     }
     .main-image {
       position: relative; z-index: 2;
       max-width: 100%; height: auto;
       cursor: pointer;
     }
-    /* Faster flash on mobile only */
     .main-image.flash {
       animation: flash 0.7s infinite;
     }
@@ -90,10 +89,7 @@
     }
     nav ul li ul.open { display: block; }
     @media (min-width: 1024px) {
-      /* 90% size logo on desktop */
-      .main-image {
-        width: 75%; height: auto; max-width: none;
-      }
+      .main-image { width: 90%; height: auto; }
       nav ul li:hover > ul, nav ul li:focus-within > ul { display: block; }
     }
 
@@ -112,30 +108,24 @@
       z-index: 3;
     }
 
-    /* Mobile-specific styles */
+    /* Mobile-specific */
     @media (max-width: 1023px) {
-      /* Smaller menu fonts on mobile */
-      nav ul li a {
-        font-size: 10px;
-      }
-      nav ul li ul li a {
-        font-size: 8px;
-      }
-      /* Larger footer font on mobile */
-      footer {
-        font-size: 1.5vw;
-      }
+      nav ul li a { font-size: 11px; }
+      nav ul li ul li a { font-size: 9px; }
+      footer { font-size: 2vw; }
     }
   </style>
 </head>
 <body>
+
   <!-- Desktop Vimeo background -->
   <div class="background-video desktop" aria-hidden="true">
     <iframe
       src="https://player.vimeo.com/video/1078142628?h=fec008f5ca&autoplay=1&loop=1&muted=1&background=1"
-      allow="autoplay; fullscreen" allowfullscreen
-      title="Cinematic background video">
-    </iframe>
+      allow="autoplay; fullscreen"
+      allowfullscreen
+      title="Cinematic background video"
+    ></iframe>
   </div>
 
   <!-- Mobile MP4 background -->
@@ -171,7 +161,7 @@
     </header>
 
     <main>
-      <img src="TheVaskezBrothers.png" alt="The Vaskez Brothers logo" class="main-image" loading="lazy" />
+      <img src="TheVaskezBrothers.png" alt="The Vaskez Brothers logo" class="main-image flash" loading="lazy" />
     </main>
 
     <footer role="contentinfo">
@@ -180,7 +170,7 @@
   </div>
 
   <script>
-    function setVh() { document.documentElement.style.setProperty('--vh', window.innerHeight * 0.01 + 'px'); }
+    function setVh() { document.documentElement.style.setProperty('--vh', window.innerHeight*0.01+'px'); }
     setVh(); window.addEventListener('resize', setVh);
 
     document.addEventListener('DOMContentLoaded', () => {
@@ -191,40 +181,36 @@
         const vid = document.getElementById('bgvid');
         const logo = document.querySelector('.main-image');
 
-        // add flash class on mobile
-        logo.classList.add('flash');
-        // initial hide UI and video
         header.style.opacity = '0';
         footer.style.opacity = '0';
         mobileBg.style.opacity = '0';
 
-        logo.addEventListener('click', () => {
-          // show video and UI
+        logo.classList.add('flash');
+
+        // trigger on any tap/click
+        document.addEventListener('click', () => {
           mobileBg.style.opacity = '1';
           header.style.opacity = '1';
           footer.style.opacity = '1';
-          // play video
-          vid.play().catch(() => {});
-          // stop flashing
+          vid.play().catch(()=>{});
           logo.classList.remove('flash');
-          logo.style.cursor = 'default';
-        });
+        }, { once: true });
       }
 
-      // submenu toggle for mobile
+      // mobile submenu toggle
       document.querySelectorAll('nav > ul > li > a').forEach(link => {
         link.addEventListener('click', e => {
           if (window.innerWidth <= 1023) {
             e.preventDefault();
             const submenu = link.nextElementSibling;
-            document.querySelectorAll('nav ul li ul.open').forEach(o => o.classList.remove('open'));
+            document.querySelectorAll('nav ul li ul.open').forEach(o=>o.classList.remove('open'));
             submenu?.classList.toggle('open');
           }
         });
       });
       document.addEventListener('click', e => {
         if (window.innerWidth <= 1023 && !e.target.closest('nav')) {
-          document.querySelectorAll('nav ul li ul.open').forEach(o => o.classList.remove('open'));
+          document.querySelectorAll('nav ul li ul.open').forEach(o=>o.classList.remove('open'));
         }
       });
     });
