@@ -1,126 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Vaskez Brothers</title>
-  <meta name="description" content="The Vaskez Brothers. Explore our short films 'CRASHER' and 'RESURGE' and connect with us on Instagram, YouTube, and Vimeo." />
-  <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://thevaskezbrothers.com/" />
-
-  <!-- Preconnect & Preload -->
-  <link rel="preconnect" href="https://player.vimeo.com" />
-  <link rel="preload" href="https://thevaskezbrothers.com/og-image.jpg" as="image" />
-  <link rel="preload" href="/Compilation.mp4" as="video" type="video/mp4" />
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mobile Video Only</title>
   <style>
-    :root { --vh: 1vh; }
-    html, body {
-      margin: 0; padding: 0;
-      height: 100%; overflow: hidden;
-      background: #000; color: #fff;
-      font-family: Helvetica, Arial, sans-serif;
-    }
-
-    .background-video.desktop,
-    .background-video.mobile {
+    /* Hide on desktop, show on mobile */
+    .mobile-video {
+      display: none;
       position: fixed;
       top: 0; left: 0;
       width: 100vw;
-      height: calc(var(--vh) * 100);
-      overflow: hidden;
-      z-index: 0;
+      height: 100vh;
+      object-fit: cover;
+      z-index: -1;
     }
-
-    .background-video.desktop iframe {
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      width: 100vw; height: 56.25vw;
-      min-width: 177.78vh; min-height: 100vh;
-      object-fit: cover; border: none;
-    }
-
-    .background-video.mobile {
-      display: none;
-    }
-
     @media (max-width: 1023px) {
-      .background-video.desktop { display: none; }
-      .background-video.mobile { display: block; }
+      .mobile-video {
+        display: block;
+      }
     }
-
-    .background-video.mobile video {
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      width: 100vw; height: 100vh;
-      object-fit: cover; border: none;
-    }
-
-    .foreground {
-      position: relative; z-index: 1;
-      height: calc(var(--vh) * 100);
-      display: flex; flex-direction: column;
-    }
-    /* … your existing nav/main/footer styles … */
   </style>
 </head>
 <body>
-
-  <!-- Desktop Vimeo background -->
-  <div class="background-video desktop" aria-hidden="true">
-    <iframe
-      src="https://player.vimeo.com/video/1078142628?h=fec008f5ca&autoplay=1&loop=1&muted=1&background=1"
-      allow="autoplay; fullscreen"
-      allowfullscreen
-      title="Cinematic background video: The Vaskez Brothers"
-    ></iframe>
-  </div>
-
-  <!-- Mobile MP4 background -->
-  <div class="background-video mobile" aria-hidden="true">
-    <video
-      autoplay
-      muted
-      playsinline
-      webkit-playsinline
-      loop
-      preload="auto"
-    >
-      <source src="/Compilation.mp4" type="video/mp4" />
-      <!-- fallback text -->
-    </video>
-  </div>
-
-  <div class="foreground">
-    <!-- … your header, nav, main, footer … -->
-  </div>
-
-  <script>
-    // -- set custom vh unit
-    function setVh() {
-      document.documentElement.style.setProperty('--vh', window.innerHeight * 0.01 + 'px');
-    }
-    setVh();
-    window.addEventListener('resize', setVh);
-
-    document.addEventListener('DOMContentLoaded', () => {
-      // mobile submenu toggles (your existing code) …
-      
-      // -- DEBUG LOGS --
-      const vw = window.innerWidth;
-      console.log('Viewport width:', vw);
-      const mobileContainer = document.querySelector('.background-video.mobile');
-      console.log('.background-video.mobile display:', getComputedStyle(mobileContainer).display);
-
-      const mobileVid = mobileContainer.querySelector('video');
-      console.log('Mobile video element found?', !!mobileVid);
-      if (mobileVid) {
-        console.log('Video currentSrc:', mobileVid.currentSrc);
-        mobileVid.play().catch(err => console.warn('Video.play() failed:', err));
-      }
-    });
-  </script>
+  <!-- This will only appear (and autoplay) on screens ≤1023px wide -->
+  <video
+    class="mobile-video"
+    autoplay
+    muted
+    loop
+    playsinline
+    webkit-playsinline
+    preload="auto"
+  >
+    <source src="/Compilation.mp4" type="video/mp4">
+    <!-- Fallback text if video isn’t supported -->
+    Your browser does not support the video tag.
+  </video>
 </body>
 </html>
